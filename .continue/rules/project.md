@@ -73,6 +73,16 @@ scripts/            # Asset download scripts
 - After editing `AGENTS.md`, run `bash scripts/sync-agent-rules.sh` to regenerate platform-specific instruction files.
 - After editing `.claude/skills/clone-website/SKILL.md`, run `node scripts/sync-skills.mjs` to regenerate the skill for all platforms.
 
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues on `unio-corp/moodboard-femmina`, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context — `CONTEXT.md` at the repo root plus `docs/adr/`. See `docs/agents/domain.md`.
+
 # Website Inspection Guide
 
 ## How to Reverse-Engineer Any Website
