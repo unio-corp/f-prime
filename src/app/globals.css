@@ -5,6 +5,16 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* magdabutrym.com's own breakpoints, so cloned components can use `mini:`,
+     `tab:`, `nav:` and `wide:` instead of Tailwind's defaults. */
+  --breakpoint-mini: 420px;
+  --breakpoint-tab: 740px;
+  --breakpoint-nav: 1000px;
+  --breakpoint-wide: 1300px;
+
+  --font-mb-sans: var(--mb-font-sans);
+  --font-mb-serif: var(--mb-font-serif);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
@@ -126,5 +136,147 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Site: www.magdabutrym.com — page: /it-en/moodboard-official
+ * Self-hosted fonts and design tokens copied verbatim from the target site.
+ * Scoped to `.mb-site` so other routes keep the shadcn defaults above.
+ * ------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "MB Sans";
+  src:
+    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/sans.woff2")
+      format("woff2"),
+    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/sans.woff")
+      format("woff");
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "MB Sans Fallback";
+  src: local("Arial");
+  ascent-override: 93.48%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+  size-adjust: 103.45%;
+}
+
+@font-face {
+  font-family: "MB Serif";
+  src:
+    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif.woff")
+      format("woff");
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "MB Serif";
+  src:
+    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif-italic.woff")
+      format("woff");
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "MB Serif Fallback";
+  src: local("Arial");
+  ascent-override: 111.76%;
+  descent-override: 35.52%;
+  line-gap-override: 0%;
+  size-adjust: 89.48%;
+}
+
+@font-face {
+  font-family: "MB Serif Alt";
+  src:
+    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif-alt.woff2")
+      format("woff2"),
+    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif-alt.woff")
+      format("woff");
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "MB Serif Alt Fallback";
+  src: local("Arial");
+  ascent-override: 131.24%;
+  descent-override: 41.73%;
+  line-gap-override: 0%;
+  size-adjust: 76.2%;
+}
+
+.mb-site {
+  --mb-font-sans: "MB Sans", "MB Sans Fallback", sans-serif;
+  --mb-font-serif: "MB Serif", "MB Serif Fallback", sans-serif;
+  --mb-font-serif-alt: "MB Serif Alt", "MB Serif Alt Fallback", sans-serif;
+
+  --mb-cream: #fcfaf7;
+  --mb-white: #fff;
+  --mb-black: #000;
+  --mb-muted: #9e9e9e;
+  --mb-disabled: #616161;
+  --mb-rule: #e0e0e0;
+  --mb-rule-soft: rgb(0 0 0 / 0.2);
+  --mb-scrim: rgb(0 0 0 / 0.7);
+  --mb-focus: #0071e3;
+  --mb-highlight: red;
+
+  /* Header height + vertical padding, verbatim from the target site. */
+  --mb-header-height: clamp(68px, 46.5135135135px + 5.7297297297vw, 121px);
+  --mb-header-padding-block: clamp(8px, 1.5135135135px + 1.7297297297vw, 24px);
+
+  font-family: var(--mb-font-sans);
+  line-height: 1;
+  color: var(--mb-black);
+  background-color: var(--mb-cream);
+  text-underline-position: under;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container side margins — the site's `.Container_wrap` scale. */
+.mb-container {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+@media (min-width: 740px) {
+  .mb-container {
+    margin-left: 36px;
+    margin-right: 36px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .mb-container {
+    margin-left: 46px;
+    margin-right: 46px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .mb-container {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+}
+
+/* The target site enables smooth scrolling globally. */
+html:has(.mb-site) {
+  background-color: var(--mb-cream, #fcfaf7);
+  scroll-behavior: smooth;
+  scroll-padding: 100px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.mb-site) {
+    scroll-behavior: auto;
   }
 }
