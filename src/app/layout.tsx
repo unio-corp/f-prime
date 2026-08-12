@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const OG_IMAGE =
-  "/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/seo/og-image.jpg";
-
+// TODO: OG image e favicon di Femmina Prime — quelle del sito sorgente non
+// vanno pubblicate sotto il nostro dominio.
 export const metadata: Metadata = {
-  metadataBase: new URL("https://magdabutrym.com"),
-  title: "Official Store",
+  metadataBase: new URL("https://moodboard-femmina.vercel.app"),
+  title: "Moodboard — Femmina Prime",
   description:
-    "Official luxury clothing designer ready-to-wear brand store Magda Butrym. Online Fashion Store. Luxury Designer Clothes. Luxury Fashion. Official Fashion Store.",
-  icons: {
-    icon: "/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/seo/favicon.ico",
-  },
+    "La moodboard di Femmina Prime: immagini, video e parole raccolte in una griglia editoriale.",
   openGraph: {
-    title: "Official Store",
+    title: "Moodboard — Femmina Prime",
     description:
-      "Official luxury clothing designer ready-to-wear brand store Magda Butrym. Online Fashion Store. Luxury Designer Clothes. Luxury Fashion. Official Fashion Store.",
-    locale: "en_IE",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630 }],
+      "La moodboard di Femmina Prime: immagini, video e parole raccolte in una griglia editoriale.",
+    locale: "it_IT",
   },
 };
 
@@ -27,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="it" className="h-full">
       <head>
         <link
           rel="preload"
