@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* magdabutrym.com's own breakpoints, so cloned components can use `mini:`,
-     `tab:`, `nav:` and `wide:` instead of Tailwind's defaults. */
+  /* The moodboard's own breakpoints — components use `mini:`, `tab:`, `nav:`
+     and `wide:` instead of Tailwind's defaults. */
   --breakpoint-mini: 420px;
   --breakpoint-tab: 740px;
   --breakpoint-nav: 1000px;
@@ -144,8 +144,8 @@
  * through their Tailwind utilities (`bg-fp-cream`, `text-fp-detail`,
  * `h-fp-action`, …) instead of restating raw px/hex values.
  *
- * Values under `fp-*` are the ones measured on the cloned target site and are
- * kept verbatim; renaming or retuning them is a customisation decision.
+ * Retuning a value here retunes it everywhere it is used; that is a
+ * deliberate design decision, not a local tweak.
  * ------------------------------------------------------------------------- */
 
 @theme {
@@ -171,7 +171,7 @@
   --leading-fp-action: 1.5;
 
   /* -- Spacing ----------------------------------------------------------- */
-  /* `.Container_wrap` side margins, one step per breakpoint. */
+  /* Container side margins, one step per breakpoint. */
   --spacing-fp-gutter: 30px;
   --spacing-fp-gutter-tab: 36px;
   --spacing-fp-gutter-nav: 46px;
@@ -196,17 +196,18 @@
 }
 
 /* ---------------------------------------------------------------------------
- * Site: www.magdabutrym.com — page: /it-en/moodboard-official
- * Self-hosted fonts copied verbatim from the target site. Page styling is
- * scoped to `.fp-site` so other routes keep the shadcn defaults above.
+ * Moodboard typography and page shell
+ *
+ * Self-hosted fonts, plus styling scoped to `.fp-site` so other routes keep
+ * the shadcn defaults above.
  * ------------------------------------------------------------------------- */
 
 @font-face {
   font-family: "MB Sans";
   src:
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/sans.woff2")
+    url("/moodboard/fonts/sans.woff2")
       format("woff2"),
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/sans.woff")
+    url("/moodboard/fonts/sans.woff")
       format("woff");
   font-display: swap;
   font-weight: 400;
@@ -224,7 +225,7 @@
 @font-face {
   font-family: "MB Serif";
   src:
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif.woff")
+    url("/moodboard/fonts/serif.woff")
       format("woff");
   font-display: swap;
   font-weight: 400;
@@ -233,7 +234,7 @@
 @font-face {
   font-family: "MB Serif";
   src:
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif-italic.woff")
+    url("/moodboard/fonts/serif-italic.woff")
       format("woff");
   font-display: swap;
   font-weight: 400;
@@ -258,7 +259,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Container side margins — the site's `.Container_wrap` scale. */
+/* Container side margins — the moodboard's horizontal rhythm. */
 .fp-container {
   margin-left: var(--spacing-fp-gutter);
   margin-right: var(--spacing-fp-gutter);
@@ -285,7 +286,7 @@
   }
 }
 
-/* The target site enables smooth scrolling globally. */
+/* Smooth scrolling is enabled globally on the moodboard. */
 html:has(.fp-site) {
   background-color: var(--color-fp-cream);
   scroll-behavior: smooth;

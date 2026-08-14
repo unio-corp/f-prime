@@ -1,6 +1,6 @@
 /**
- * Content contracts for the magdabutrym.com `/it-en/moodboard-official` clone.
- * Shapes mirror the target site's RSC payload, narrowed to what the UI renders.
+ * Content contracts for the moodboard. Shapes are narrowed to what the UI
+ * actually renders.
  */
 
 export interface MoodboardImageMedia {

@@ -1,17 +1,18 @@
-import { MoodboardGrid } from "@/components/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/MoodboardGrid";
+import { MoodboardGrid } from "@/components/moodboard/MoodboardGrid";
+import { getAllMoodItems } from "@/lib/moodboard/source";
 
 /**
- * Clone of the moodboard section of
- * https://www.magdabutrym.com/it-en/moodboard-official ("Elevated Forms").
- *
- * Scope is the grid and its products preview modal only — the site chrome
- * (promo bar, header, footer) is intentionally not part of this clone.
+ * The Femmina Prime moodboard: an editorial grid of Tiles, each opening a
+ * products preview. Content is read on the server through the moodboard
+ * source and handed to the grid as props.
  */
-export default function Home() {
+export default async function Home() {
+  const items = await getAllMoodItems();
+
   return (
     <div className="fp-site flex min-h-full flex-col">
       <main>
-        <MoodboardGrid />
+        <MoodboardGrid items={items} />
       </main>
     </div>
   );
