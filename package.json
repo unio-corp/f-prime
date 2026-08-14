@@ -1,13 +1,13 @@
 {
-  "name": "moodboard-femmina",
+  "name": "f-prime",
   "version": "0.1.0",
   "private": true,
   "description": "La moodboard di Femmina Prime",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unio-corp/moodboard-femmina.git"
+    "url": "https://github.com/unio-corp/f-prime.git"
   },
-  "homepage": "https://moodboard-femmina.vercel.app",
+  "homepage": "https://f-prime.vercel.app",
   "engines": {
     "node": "24.x"
   },

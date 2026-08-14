@@ -8,12 +8,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Moodboard Femmina Prime
+# Femmina Prime
 
 ## What This Is
-The Femmina Prime moodboard: an editorial grid of Tiles, each pairing a Medium
-(image or video) with a Text and its Provenance. Domain vocabulary lives in
-`CONTEXT.md` — read it before naming anything.
+`f-prime` is the main Femmina Prime repo. Its current surface is the moodboard:
+an editorial grid of Tiles, each pairing a Medium (image or video) with a Text
+and its Provenance. Domain vocabulary lives in `CONTEXT.md` — read it before
+naming anything.
 
 The current UI started as a clone of the moodboard section of
 `magdabutrym.com/it-en/moodboard-official`. The emulation phase is over: the
@@ -27,7 +28,7 @@ they are rewritten.
 - **UI:** shadcn/ui (Base UI primitives, Tailwind CSS v4, `cn()` utility)
 - **Icons:** extracted SVGs in `src/components/sites/<host>/shared/icons.tsx`; Lucide React for the rest
 - **Styling:** Tailwind CSS v4 with oklch design tokens
-- **Deployment:** Vercel (`unio-root/moodboard-femmina`)
+- **Deployment:** Vercel (`unio-root/f-prime`)
 
 ## Commands
 - `npm run dev` — Start dev server
@@ -79,7 +80,7 @@ CONTEXT.md              # Ubiquitous language (glossary only)
 
 ### Issue tracker
 
-GitHub Issues on `unio-corp/moodboard-femmina`, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+GitHub Issues on `unio-corp/f-prime`, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Domain docs
 

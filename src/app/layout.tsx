@@ -4,7 +4,7 @@ import "./globals.css";
 // TODO: OG image e favicon di Femmina Prime — quelle del sito sorgente non
 // vanno pubblicate sotto il nostro dominio.
 export const metadata: Metadata = {
-  metadataBase: new URL("https://moodboard-femmina.vercel.app"),
+  metadataBase: new URL("https://f-prime.vercel.app"),
   title: "Moodboard — Femmina Prime",
   description:
     "La moodboard di Femmina Prime: immagini, video e parole raccolte in una griglia editoriale.",

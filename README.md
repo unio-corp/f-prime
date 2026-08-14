@@ -1,9 +1,11 @@
-# Moodboard Femmina Prime
+# Femmina Prime
 
-La moodboard di Femmina Prime: una griglia editoriale di Tile, ognuna con un
-Medium (immagine o video), un Testo e la sua Provenienza.
+Repo principale di Femmina Prime (`f-prime`). La superficie attuale è la
+moodboard: una griglia editoriale di Tile, ognuna con un Medium (immagine o
+video), un Testo e la sua Provenienza.
 
-**Produzione:** https://moodboard-femmina.vercel.app
+**Produzione:** https://f-prime.vercel.app
+(`moodboard-femmina.vercel.app` resta come alias storico)
 
 ## Stato
 
@@ -43,10 +45,10 @@ npm run check        # i tre precedenti in sequenza
 
 ```bash
 vercel deploy          # preview (protetta da Vercel Authentication)
-vercel deploy --prod   # produzione → moodboard-femmina.vercel.app
+vercel deploy --prod   # produzione → f-prime.vercel.app
 ```
 
-Progetto Vercel: `unio-root/moodboard-femmina`.
+Progetto Vercel: `unio-root/f-prime`.
 
 ## Struttura
 
