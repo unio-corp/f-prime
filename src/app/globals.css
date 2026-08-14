@@ -12,9 +12,6 @@
   --breakpoint-nav: 1000px;
   --breakpoint-wide: 1300px;
 
-  --font-mb-sans: var(--mb-font-sans);
-  --font-mb-serif: var(--mb-font-serif);
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
@@ -140,9 +137,68 @@
 }
 
 /* ---------------------------------------------------------------------------
+ * Design tokens
+ *
+ * Every visual value used by the moodboard lives here, grouped as colour,
+ * typography, spacing, radius and motion. Components reference the tokens
+ * through their Tailwind utilities (`bg-fp-cream`, `text-fp-detail`,
+ * `h-fp-action`, …) instead of restating raw px/hex values.
+ *
+ * Values under `fp-*` are the ones measured on the cloned target site and are
+ * kept verbatim; renaming or retuning them is a customisation decision.
+ * ------------------------------------------------------------------------- */
+
+@theme {
+  /* -- Colour ------------------------------------------------------------ */
+  --color-fp-cream: #fcfaf7;
+  --color-fp-white: #fff;
+  --color-fp-black: #000;
+  --color-fp-muted: #9e9e9e;
+  --color-fp-focus: #0071e3;
+  /* Modal grounds: the wide-viewport backdrop and the product image plate. */
+  --color-fp-surface: #f5f3ef;
+  --color-fp-surface-sunken: #f0eeea;
+
+  /* -- Typography -------------------------------------------------------- */
+  --font-fp-sans: "MB Sans", "MB Sans Fallback", sans-serif;
+  --font-fp-serif: "MB Serif", "MB Serif Fallback", sans-serif;
+  /* Price and "View details": 13px on a 25px rhythm. */
+  --text-fp-detail: 13px;
+  --text-fp-detail--line-height: 1.9230769231;
+  --text-fp-cap: 0.8rem;
+  --leading-fp-flat: 1;
+  --leading-fp-title: 1.25;
+  --leading-fp-action: 1.5;
+
+  /* -- Spacing ----------------------------------------------------------- */
+  /* `.Container_wrap` side margins, one step per breakpoint. */
+  --spacing-fp-gutter: 30px;
+  --spacing-fp-gutter-tab: 36px;
+  --spacing-fp-gutter-nav: 46px;
+  --spacing-fp-gutter-wide: 60px;
+  --spacing-fp-scroll-offset: 100px;
+  --spacing-fp-action: 35px;
+  --spacing-fp-close: 60px;
+  --spacing-fp-media-min: 100px;
+  --spacing-fp-modal-fold: 110px;
+  --spacing-fp-product-column: 800px;
+  /* Zero-width flex spacers that keep the mobile scroller centred. */
+  --spacing-fp-hairline: 0.1px;
+  --spacing-fp-ring: 2px;
+
+  /* -- Radius ------------------------------------------------------------ */
+  /* Caps on the shadcn radius scale for the two smallest button sizes. */
+  --radius-fp-cap-xs: 10px;
+  --radius-fp-cap-sm: 12px;
+
+  /* -- Motion ------------------------------------------------------------ */
+  --duration-fp-base: 300ms;
+}
+
+/* ---------------------------------------------------------------------------
  * Site: www.magdabutrym.com — page: /it-en/moodboard-official
- * Self-hosted fonts and design tokens copied verbatim from the target site.
- * Scoped to `.mb-site` so other routes keep the shadcn defaults above.
+ * Self-hosted fonts copied verbatim from the target site. Page styling is
+ * scoped to `.fp-site` so other routes keep the shadcn defaults above.
  * ------------------------------------------------------------------------- */
 
 @font-face {
@@ -193,90 +249,51 @@
   size-adjust: 89.48%;
 }
 
-@font-face {
-  font-family: "MB Serif Alt";
-  src:
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif-alt.woff2")
-      format("woff2"),
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif-alt.woff")
-      format("woff");
-  font-display: swap;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "MB Serif Alt Fallback";
-  src: local("Arial");
-  ascent-override: 131.24%;
-  descent-override: 41.73%;
-  line-gap-override: 0%;
-  size-adjust: 76.2%;
-}
-
-.mb-site {
-  --mb-font-sans: "MB Sans", "MB Sans Fallback", sans-serif;
-  --mb-font-serif: "MB Serif", "MB Serif Fallback", sans-serif;
-  --mb-font-serif-alt: "MB Serif Alt", "MB Serif Alt Fallback", sans-serif;
-
-  --mb-cream: #fcfaf7;
-  --mb-white: #fff;
-  --mb-black: #000;
-  --mb-muted: #9e9e9e;
-  --mb-disabled: #616161;
-  --mb-rule: #e0e0e0;
-  --mb-rule-soft: rgb(0 0 0 / 0.2);
-  --mb-scrim: rgb(0 0 0 / 0.7);
-  --mb-focus: #0071e3;
-  --mb-highlight: red;
-
-  /* Header height + vertical padding, verbatim from the target site. */
-  --mb-header-height: clamp(68px, 46.5135135135px + 5.7297297297vw, 121px);
-  --mb-header-padding-block: clamp(8px, 1.5135135135px + 1.7297297297vw, 24px);
-
-  font-family: var(--mb-font-sans);
-  line-height: 1;
-  color: var(--mb-black);
-  background-color: var(--mb-cream);
+.fp-site {
+  font-family: var(--font-fp-sans);
+  line-height: var(--leading-fp-flat);
+  color: var(--color-fp-black);
+  background-color: var(--color-fp-cream);
   text-underline-position: under;
   -webkit-font-smoothing: antialiased;
 }
 
 /* Container side margins — the site's `.Container_wrap` scale. */
-.mb-container {
-  margin-left: 30px;
-  margin-right: 30px;
+.fp-container {
+  margin-left: var(--spacing-fp-gutter);
+  margin-right: var(--spacing-fp-gutter);
 }
 
 @media (min-width: 740px) {
-  .mb-container {
-    margin-left: 36px;
-    margin-right: 36px;
+  .fp-container {
+    margin-left: var(--spacing-fp-gutter-tab);
+    margin-right: var(--spacing-fp-gutter-tab);
   }
 }
 
 @media (min-width: 1000px) {
-  .mb-container {
-    margin-left: 46px;
-    margin-right: 46px;
+  .fp-container {
+    margin-left: var(--spacing-fp-gutter-nav);
+    margin-right: var(--spacing-fp-gutter-nav);
   }
 }
 
 @media (min-width: 1300px) {
-  .mb-container {
-    margin-left: 60px;
-    margin-right: 60px;
+  .fp-container {
+    margin-left: var(--spacing-fp-gutter-wide);
+    margin-right: var(--spacing-fp-gutter-wide);
   }
 }
 
 /* The target site enables smooth scrolling globally. */
-html:has(.mb-site) {
-  background-color: var(--mb-cream, #fcfaf7);
+html:has(.fp-site) {
+  background-color: var(--color-fp-cream);
   scroll-behavior: smooth;
-  scroll-padding: 100px;
+  scroll-padding: var(--spacing-fp-scroll-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html:has(.mb-site) {
+  html:has(.fp-site) {
     scroll-behavior: auto;
   }
 }

@@ -28,27 +28,27 @@ function ProductRow({ product }: { product: MoodboardProduct }) {
   return (
     <div className="relative flex w-60 flex-col-reverse nav:grid nav:w-auto nav:grid-cols-2 nav:items-start">
       <div className="nav:sticky nav:top-0 nav:flex nav:h-screen nav:flex-col nav:justify-center nav:pr-8 nav:pl-16">
-        <h2 className="font-mb-serif text-base leading-[1.25] text-black">
+        <h2 className="font-fp-serif text-base leading-fp-title text-fp-black">
           {product.title}
         </h2>
-        <p className="font-mb-sans mt-1 text-[13px] leading-[1.9230769231] text-[#9e9e9e]">
+        <p className="font-fp-sans mt-1 text-fp-detail text-fp-muted">
           {formatPrice(product)}
         </p>
         <button
           type="button"
-          className="font-mb-sans mt-3 h-10 w-full bg-black text-center text-xs leading-[1.5] text-white transition-colors duration-300 nav:h-[35px] nav:border nav:border-black nav:bg-transparent nav:text-black nav:hover:bg-black nav:hover:text-white"
+          className="font-fp-sans mt-3 h-10 w-full bg-fp-black text-center text-xs leading-fp-action text-fp-white transition-colors duration-[var(--duration-fp-base)] nav:h-fp-action nav:border nav:border-fp-black nav:bg-transparent nav:text-fp-black nav:hover:bg-fp-black nav:hover:text-fp-white"
         >
           Add to bag
         </button>
         <Link
           href={product.href}
-          className="font-mb-sans mt-3 self-center text-[13px] leading-[1.9230769231] text-black underline [text-underline-offset:2px]"
+          className="font-fp-sans mt-3 self-center text-fp-detail text-fp-black underline [text-underline-offset:var(--spacing-fp-ring)]"
         >
           View details
         </Link>
       </div>
 
-      <div className="relative aspect-[1000/1400] w-60 shrink-0 bg-[#f0eeea] nav:h-screen nav:w-full nav:bg-transparent">
+      <div className="relative aspect-[1000/1400] w-60 shrink-0 bg-fp-surface-sunken nav:h-screen nav:w-full nav:bg-transparent">
         {product.image ? (
           <Image
             src={product.image.src}
@@ -133,11 +133,11 @@ export function ProductsPreviewModal({ tile, onClose }: ProductsPreviewModalProp
       aria-modal="true"
       aria-label="Product preview"
       className={cn(
-        "fixed inset-0 z-[9000] overflow-y-auto bg-white opacity-0 transition-opacity duration-300 wide:bg-[#f5f3ef]",
+        "fixed inset-0 z-[9000] overflow-y-auto bg-fp-white opacity-0 transition-opacity duration-[var(--duration-fp-base)] wide:bg-fp-surface",
         isVisible && "opacity-100",
       )}
     >
-      <div className="mb-container pointer-events-none fixed inset-x-0 top-0 z-[2] grid h-15 grid-cols-[60px_1fr_60px]">
+      <div className="fp-container pointer-events-none fixed inset-x-0 top-0 z-[2] grid h-15 grid-cols-[var(--spacing-fp-close)_1fr_var(--spacing-fp-close)]">
         <button
           ref={closeButtonRef}
           type="button"
@@ -145,13 +145,13 @@ export function ProductsPreviewModal({ tile, onClose }: ProductsPreviewModalProp
           onClick={onClose}
           className="pointer-events-auto col-start-3 grid cursor-pointer place-items-center justify-self-end"
         >
-          <CloseIcon className="size-6 text-black" />
+          <CloseIcon className="size-6 text-fp-black" />
         </button>
       </div>
 
-      <div className="grid h-full max-h-full min-h-[calc(71vh+110px)] grid-rows-[1fr_auto] mini:max-h-none mini:min-h-screen nav:grid-cols-[1fr_1fr] nav:grid-rows-none wide:grid-cols-[1fr_800px]">
+      <div className="grid h-full max-h-full min-h-[calc(71vh+var(--spacing-fp-modal-fold))] grid-rows-[1fr_auto] mini:max-h-none mini:min-h-screen nav:grid-cols-[1fr_1fr] nav:grid-rows-none wide:grid-cols-[1fr_var(--spacing-fp-product-column)]">
         <div className="relative min-h-0 overflow-hidden nav:overflow-visible">
-          <div className="h-full min-h-[100px] w-full px-16 py-6 mini:px-8 tab:px-12 nav:sticky nav:top-0 nav:flex nav:h-screen nav:items-center nav:p-16">
+          <div className="h-full min-h-fp-media-min w-full px-16 py-6 mini:px-8 tab:px-12 nav:sticky nav:top-0 nav:flex nav:h-screen nav:items-center nav:p-16">
             <TileMedia
               media={tile.media}
               layout="intrinsic"
@@ -161,7 +161,7 @@ export function ProductsPreviewModal({ tile, onClose }: ProductsPreviewModalProp
           </div>
         </div>
 
-        <div className="grid auto-cols-min grid-flow-col justify-items-center gap-x-6 gap-y-0.5 overflow-x-auto overflow-y-hidden pb-4 [-ms-overflow-style:none] [align-content:safe_center] [scrollbar-width:none] before:block before:w-[0.1px] before:content-[''] after:block after:w-[0.1px] after:content-['_'] [&::-webkit-scrollbar]:hidden nav:auto-cols-auto nav:grid-flow-row nav:justify-items-stretch nav:gap-x-0 nav:overflow-x-hidden nav:overflow-y-visible nav:bg-[#fcfaf7] nav:pb-0">
+        <div className="grid auto-cols-min grid-flow-col justify-items-center gap-x-6 gap-y-0.5 overflow-x-auto overflow-y-hidden pb-4 [-ms-overflow-style:none] [align-content:safe_center] [scrollbar-width:none] before:block before:w-fp-hairline before:content-[''] after:block after:w-fp-hairline after:content-['_'] [&::-webkit-scrollbar]:hidden nav:auto-cols-auto nav:grid-flow-row nav:justify-items-stretch nav:gap-x-0 nav:overflow-x-hidden nav:overflow-y-visible nav:bg-fp-cream nav:pb-0">
           {products.map((product) => (
             <ProductRow key={product.handle} product={product} />
           ))}

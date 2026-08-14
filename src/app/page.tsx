@@ -9,7 +9,7 @@ import { MoodboardGrid } from "@/components/sites/www-magdabutrym-com-f039a414/i
  */
 export default function Home() {
   return (
-    <div className="mb-site flex min-h-full flex-col">
+    <div className="fp-site flex min-h-full flex-col">
       <main>
         <MoodboardGrid />
       </main>
