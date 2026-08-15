@@ -1,41 +1,48 @@
 import type { MoodboardTile } from '@/types/moodboard';
 
 /**
- * Static Tile data (captured 2026-08-11), read only through `./source.ts`.
- * Superseded once the CMS is wired up.
+ * CONTENUTI PLACEHOLDER TEMPORANEI — DA SOSTITUIRE PRIMA DEL LANCIO.
+ *
+ * Ogni Tile punta a `/moodboard/placeholder.jpg`. Solo `width`/`height` sono
+ * reali: portano le proporzioni originali di ciascuna Tile, così griglia e
+ * modale si dispongono esattamente come faranno con i Media definitivi.
+ *
+ * Sostituire questo file (o il CMS dietro `./source.ts`) con i Media veri
+ * prima del lancio: pubblicare il placeholder significherebbe pubblicare 32
+ * immagini identiche.
  */
 
 export const MOODBOARD_TILES: MoodboardTile[] = [
-  {"id":0,"media":{"kind":"image","src":"/moodboard/tiles/c575b5a0bfde7ccbe7a7fcc541e4c7c4c9c24d73-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-jacket-08-beige"]},
-  {"id":1,"media":{"kind":"video","src":"/moodboard/videos/4w8B7Sg5MhEIydHZU6FszSd02rjDBn01kUjKIuQdqwvWk.mp4","poster":"/moodboard/videos/4w8B7Sg5MhEIydHZU6FszSd02rjDBn01kUjKIuQdqwvWk.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-barbara-bag-black-leather","pf26-blouse-11-black","pf26-skirt-11-black","pf26-skirt-20-cream","pf26-mules-pink-satin"]},
-  {"id":2,"media":{"kind":"image","src":"/moodboard/tiles/808be515ac104ba44c76743fbf0b6de734186e8c-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-dress-55-red"]},
-  {"id":3,"media":{"kind":"image","src":"/moodboard/tiles/b58027505ca3e5f3c3ffb5a7333560e3565dd06e-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-rose-low-slingbacks-distressed-taffeta-black"]},
-  {"id":4,"media":{"kind":"video","src":"/moodboard/videos/AvUvE4feZrfW6HfcEH02JdecjEzrhexCENNoFZwrSPPg.mp4","poster":"/moodboard/videos/AvUvE4feZrfW6HfcEH02JdecjEzrhexCENNoFZwrSPPg.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-oval-sunglasses-black-with-yellow-lenses","pf26-dress-42-yellow-print","pf26-brigitte-bag-regular-cream-leather","pf26-earrings-05-rhodium"]},
-  {"id":5,"media":{"kind":"image","src":"/moodboard/tiles/1a54ad3abbd29b18005eff9fe8571f7962823fa1-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-leather-16-coat-dark-brown","pf26-crochet-03-dress-cream","pf26-barbara-bag-croco-leather"]},
-  {"id":6,"media":{"kind":"image","src":"/moodboard/tiles/7e5e7564bdd5402673d8c53b333a251d18ae2ca5-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-oval-sunglasses-milky-brown","pf26-coat-02-brown","pf26-crochet-04-dress-cream","pf26-barbara-bag-croco-leather","pf26-high-heel-office-mules-black-leather"]},
-  {"id":7,"media":{"kind":"video","src":"/moodboard/videos/UFgM6fAK01zidFZ01ez00Z5ZBehgon00fpYYEc4ZbL01Y02PQ.mp4","poster":"/moodboard/videos/UFgM6fAK01zidFZ01ez00Z5ZBehgon00fpYYEc4ZbL01Y02PQ.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-dress-10-black","pf26-oval-sunglasses-milky-brown","pf26-earrings-05-rhodium","pf26-low-slingbacks-leather-croco","pf26-barbara-bag-croco-leather"]},
-  {"id":8,"media":{"kind":"video","src":"/moodboard/videos/XmfAJD0202XhgjGOTZl2sP029a3mCwDd9iltpRrpYoAoyI.mp4","poster":"/moodboard/videos/XmfAJD0202XhgjGOTZl2sP029a3mCwDd9iltpRrpYoAoyI.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-rose-low-slingbacks-distressed-taffeta-black","pf26-dress-11-black"]},
-  {"id":9,"media":{"kind":"image","src":"/moodboard/tiles/2612e8beda82774c8e32f8a65a93a5d41f007bf4-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["ss26-round-sunglasses-brown","pf26-coat-01-grey","pf26-skirt-17-cream"]},
-  {"id":10,"media":{"kind":"image","src":"/moodboard/tiles/8bc4a7d76736d3478c66fa6bb1ae9e844ff9a2ee-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-brigitte-bag-regular-leather-croco"]},
-  {"id":11,"media":{"kind":"video","src":"/moodboard/videos/VQ1jLR1zcl2xJDpffOJ00lMHACBXGWR8ao6IPwiVXf4c.mp4","poster":"/moodboard/videos/VQ1jLR1zcl2xJDpffOJ00lMHACBXGWR8ao6IPwiVXf4c.jpg","width":1080,"height":1440,"alt":""},"products":["ss26-oval-sunglasses-beige","pf26-leather-09-jacket-dark-brown","pf26-crochet-04-dress-cream","pf26-skirt-20-cream","pf26-low-slingbacks-leather-croco"]},
-  {"id":12,"media":{"kind":"image","src":"/moodboard/tiles/1c910391baa778d77458b078fd5d77f95261cb0f-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-oval-sunglasses-milky-brown","pf26-dress-13-cream","pf26-mules-cream-satin-with-taffeta-flowers"]},
-  {"id":13,"media":{"kind":"video","src":"/moodboard/videos/GW02334hX8G02coOqZif5uLN202DCuhBRKDULzwRartMa00.mp4","poster":"/moodboard/videos/GW02334hX8G02coOqZif5uLN202DCuhBRKDULzwRartMa00.jpg","width":1080,"height":1440,"alt":""},"products":["ss26-oval-sunglasses-brown","pf26-leather-24-blazer-black","pf26-denim-11-pants-blue","pf26-thong-heel-sandal-black-scuba","re26-brigitte-regular-black-leather-with-charm"]},
-  {"id":14,"media":{"kind":"video","src":"/moodboard/videos/rqy9VvPuM1uepnkhn13602UfZg1ROT9yiH2ygEGzMkos.mp4","poster":"/moodboard/videos/rqy9VvPuM1uepnkhn13602UfZg1ROT9yiH2ygEGzMkos.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-brigitte-bag-regular-leather-croco","pf26-brigitte-bag-regular-cream-leather","re26-brigitte-regular-black-leather-with-charm","pf26-high-heel-office-mules-black-leather","pf26-blazer-02-black","pf26-pants-02-black","pf26-blazer-05-black","pf26-pants-03-black","pf26-blouse-13-grey","pf26-leather-28-skirt-black","pf26-skirt-20-cream"]},
-  {"id":15,"media":{"kind":"image","src":"/moodboard/tiles/8757dd3f419c30dbef152b82f193d8d2d8391380-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-rectangular-sunglasses-milky-brown","pf26-leather-09-jacket-brown","pf26-leather-18-pants-brown","pf26-knitwear-25-swaeter-white"]},
-  {"id":16,"media":{"kind":"image","src":"/moodboard/tiles/2e2610e36e4367b6b5fecd4f0438abc4bf7effd4-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-oval-sunglasses-milky-brown","pf26-leather-09-jacket-dark-brown"]},
-  {"id":17,"media":{"kind":"image","src":"/moodboard/tiles/6a2ef9f1b12cc87827c857ebc51c766a6db7df3e-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-thong-heel-sandal-black-satin-with-flower"]},
-  {"id":18,"media":{"kind":"video","src":"/moodboard/videos/eZPvnBNbRLHmgaLxS02f6VRODohfA01Icm900s6nOmNasI.mp4","poster":"/moodboard/videos/eZPvnBNbRLHmgaLxS02f6VRODohfA01Icm900s6nOmNasI.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-top-05-white","pf26-crochet-05-skirt-cream","pf26-skirt-20-cream","pf26-earrings-05-rhodium","pf26-mules-pink-satin","ss26-julia-bag-cream-leather","ss26-scarf-01-white"]},
-  {"id":19,"media":{"kind":"image","src":"/moodboard/tiles/95b17ae8c4069be3364d40f0dffd756163df7767-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-coat-06-grey","pf26-leather-18-pants-black","pf26-thong-heel-sandal-black-scuba"]},
-  {"id":20,"media":{"kind":"video","src":"/moodboard/videos/jwwvr1P4p1V7PdoM79YXVl9Lei4HeuFvgKTAAdvzZIw.mp4","poster":"/moodboard/videos/jwwvr1P4p1V7PdoM79YXVl9Lei4HeuFvgKTAAdvzZIw.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-dress-13-brown","pf26-skirt-20-cream","pf26-mules-pink-satin","pf26-earrings-05-rhodium","pf26-julia-bag-brown-nubuck","ss26-round-sunglasses-brown"]},
-  {"id":21,"media":{"kind":"image","src":"/moodboard/tiles/2ea374e21a013610f61486260c89912ed83c665f-2226x2783.jpg","width":2226,"height":2783,"alt":""},"products":["pf26-earrings-06-rhodium"]},
-  {"id":22,"media":{"kind":"image","src":"/moodboard/tiles/4af56f1dcdd37c320823a6e962a22fbc9e23cf0f-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-dress-35-red","pf26-high-heel-office-mules-black-leather","pf26-barbara-bag-black-leather","pf26-earrings-05-rhodium"]},
-  {"id":23,"media":{"kind":"video","src":"/moodboard/videos/ebrXqRT003SZeaR6phVaL02ZeQqJ6J900Al6dsNC2l00H300.mp4","poster":"/moodboard/videos/ebrXqRT003SZeaR6phVaL02ZeQqJ6J900Al6dsNC2l00H300.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-leather-02-jacket-black","pf26-leather-28-skirt-black","pf26-skirt-20-cream","pf26-oval-sunglasses-milky-brown","pf26-earrings-05-rhodium","pf26-high-heel-office-mules-black-leather"]},
-  {"id":24,"media":{"kind":"image","src":"/moodboard/tiles/1a618895d5169f881d028db5657c7189e6ccf657-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-coat-05-beige","pf26-leather-18-pants-black","pf26-thong-heel-sandal-black-scuba"]},
-  {"id":25,"media":{"kind":"video","src":"/moodboard/videos/lPFJy1m01AvYztO01xUz335s17lnPpVxBygrEnLRZtoCY.mp4","poster":"/moodboard/videos/lPFJy1m01AvYztO01xUz335s17lnPpVxBygrEnLRZtoCY.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-leather-04-jacket-brown","pf26-leather-28-skirt-brown","pf26-dress-11-black","ss26-round-sunglasses-brown","ss26-rectangular-sunglasses-black","pf26-earrings-05-rhodium","pf26-brigitte-bag-regular-leather-croco"]},
-  {"id":26,"media":{"kind":"image","src":"/moodboard/tiles/941d1cd6636e8006ba3bca516f0f6f8f5aa64d0d-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-dress-30-cream-sequins","pf26-skirt-20-cream","pf26-oval-sunglasses-milky-brown","pf26-apolonia-bag-boxed-leather-black","pf26-high-heel-office-mules-black-leather"]},
-  {"id":27,"media":{"kind":"video","src":"/moodboard/videos/NcHcv9gdvwiP4WG9JwH65dBzlUdCq2900MbUHZ9DhBKU.mp4","poster":"/moodboard/videos/NcHcv9gdvwiP4WG9JwH65dBzlUdCq2900MbUHZ9DhBKU.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-leather-30-jacket-burgundy","pf26-skirt-13-bordeaux","ss26-round-sunglasses-brown","pf26-earrings-05-rhodium","pf26-high-heel-office-mules-black-leather"]},
-  {"id":28,"media":{"kind":"image","src":"/moodboard/tiles/bc2bc949b8428af1bec9a857172306baeb7d51a5-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-apolonia-bag-boxed-leather-black"]},
-  {"id":29,"media":{"kind":"image","src":"/moodboard/tiles/46678ce085de1ad599dc0bfc876dd52398f1a57e-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-dress-56-beige","pf26-oval-sunglasses-milky-brown"]},
-  {"id":30,"media":{"kind":"video","src":"/moodboard/videos/AZlX2hRXfdvnu8WqgYSNGiAhbld4UNtN5GX01n15jSA8.mp4","poster":"/moodboard/videos/AZlX2hRXfdvnu8WqgYSNGiAhbld4UNtN5GX01n15jSA8.jpg","width":1080,"height":1440,"alt":""},"products":["pf26-dress-10-black","pf26-barbara-bag-black-leather","pf26-high-heel-office-mules-black-leather","pf26-earrings-05-rhodium","ss26-oval-sunglasses-black"]},
-  {"id":31,"media":{"kind":"image","src":"/moodboard/tiles/a5cd2d687d60bb0e8a970be1d9b999373d4a66e9-2000x2500.jpg","width":2000,"height":2500,"alt":""},"products":["pf26-mules-cream-satin-with-taffeta-flowers"]},
+  {"id":0,"media":{"kind":"image","src":"/moodboard/tiles/tile-0.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":1,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":2,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":3,"media":{"kind":"image","src":"/moodboard/tiles/tile-3.jpg","width":1600,"height":2400,"alt":""},"modal":"zoom"},
+  {"id":4,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":5,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":6,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":7,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":8,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":9,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":10,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":11,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":12,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":13,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":14,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":15,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":16,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":17,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":18,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":19,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":20,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":21,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2226,"height":2783,"alt":""},"modal":"zoom"},
+  {"id":22,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":23,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":24,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":25,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":26,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":27,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":28,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":29,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":30,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
+  {"id":31,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
 ];
