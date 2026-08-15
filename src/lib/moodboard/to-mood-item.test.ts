@@ -101,6 +101,21 @@ describe("toMoodItem", () => {
     expect(item.modal === "gallery" && item.extraMedia).toHaveLength(3);
   });
 
+  it("scarta gli href protocol-relative mascherati da backslash senza scartare il Medium", () => {
+    const item = toMoodItem(
+      tile(11, {
+        modal: "gallery",
+        // WHATWG tratta `\` come `/` negli schemi speciali: senza risolvere
+        // con una base fittizia, questi href sembrerebbero root-relative.
+        extraMedia: [detail("/\\evil.example"), detail("/\\/evil.example")],
+      }),
+    );
+
+    const hrefs = item.modal === "gallery" ? item.extraMedia.map((entry) => entry.href) : [];
+    expect(hrefs).toEqual([undefined, undefined]);
+    expect(item.modal === "gallery" && item.extraMedia).toHaveLength(2);
+  });
+
   it("avvisa una sola volta per Tile quando degrada", () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
 

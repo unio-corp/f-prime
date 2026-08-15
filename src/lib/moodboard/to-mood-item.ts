@@ -26,19 +26,34 @@ export type MoodItem =
   | (MoodItemBase & { modal: "gallery"; extraMedia: readonly [DetailMedium, ...DetailMedium[]] })
   | (MoodItemBase & { modal: "double"; extraMedia: readonly [DetailMedium] });
 
+// Base fittizia usata solo per risolvere gli href relativi: se dopo la
+// risoluzione l'origin è ancora questo, l'href era davvero root-relative.
+const PLACEHOLDER_BASE = "https://placeholder.invalid";
+
 /**
  * Tiene fuori dal DOM tutto ciò che non è una pagina: `javascript:`, `data:`,
- * `mailto:` e gli URL protocol-relative, che seguono lo schema della pagina e
- * portano altrove.
+ * `mailto:` e gli URL protocol-relative — inclusi quelli mascherati da
+ * backslash (`/\evil.example`), che il WHATWG URL parser tratta come `/`
+ * negli schemi speciali (http/https) e che un controllo su prefissi di
+ * stringa non intercetta.
  */
 function safeHref(href: string | undefined): string | undefined {
   if (!href) return undefined;
-  if (href.startsWith("//")) return undefined;
-  if (href.startsWith("/")) return href;
 
+  // Href assoluto: valido solo se lo è già da solo, senza bisogno di base.
   try {
     const { protocol } = new URL(href);
     return protocol === "http:" || protocol === "https:" ? href : undefined;
+  } catch {
+    // Non è un URL assoluto: potrebbe essere root-relative, si continua sotto.
+  }
+
+  // Href relativo: si risolve contro una base fittizia. Se l'origin
+  // risultante è ancora quello della base, l'href era davvero root-relative
+  // e non ha spostato la navigazione altrove.
+  try {
+    const resolved = new URL(href, PLACEHOLDER_BASE);
+    return resolved.origin === PLACEHOLDER_BASE ? href : undefined;
   } catch {
     return undefined;
   }
