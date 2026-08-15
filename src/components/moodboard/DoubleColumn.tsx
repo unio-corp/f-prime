@@ -12,7 +12,11 @@ export function DoubleColumn({ item, onCursorLabel }: ModalColumnProps<"double">
   const [medium] = item.extraMedia;
 
   return (
-    <div className="flex min-h-full items-start">
+    // Contenitore di blocco, non flex: un flex item non si allarga sull'asse
+    // principale, quindi si adatterebbe alla larghezza intrinseca dell'immagine
+    // invece che a quella della colonna. Un div di blocco lascia il figlio
+    // `w-full` di ColumnMedium riempire davvero la colonna.
+    <div className="min-h-full">
       <ColumnMedium
         item={medium}
         onCursorLabel={onCursorLabel}
