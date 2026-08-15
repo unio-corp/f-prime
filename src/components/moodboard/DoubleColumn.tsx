@@ -23,6 +23,8 @@ export function DoubleColumn({ item, onCursorLabel }: ModalColumnProps<"double">
         priority
         // La colonna occupa metà viewport da `nav:` in su, tutta sotto.
         sizes="(min-width: 64rem) 50vw, 100vw"
+        // Le due immagini di `double` devono avere la stessa altezza.
+        matchHeight
       />
     </div>
   );

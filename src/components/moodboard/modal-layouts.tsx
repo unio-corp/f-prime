@@ -18,13 +18,29 @@ export const RIGHT_COLUMN_RENDERERS: {
 } = { double: DoubleColumn, gallery: GalleryColumn };
 
 /**
- * Classi della colonna sinistra (la copertina, resa dal guscio) per-layout.
- * Solo `gallery` ne ha bisogno: la copertina resta ancorata in basso mentre
- * la colonna destra, più alta, scorre. `double` non richiede nulla di
- * speciale: altezza auto, nessuna ancora.
+ * Ciò che il guscio deve sapere sulla colonna sinistra (la copertina, che
+ * comunque rende lui) per un dato layout — senza saperne il nome.
  */
-const LEFT_COLUMN_CLASSES: { [K in RightColumnLayout]?: string } = {
-  gallery: "nav:self-end nav:sticky nav:bottom-0",
+interface LeftColumnConfig {
+  /** Classe applicata al div che avvolge `ZoomMedia`. */
+  className?: string;
+  /**
+   * Se vero, la copertina condivide l'altezza della colonna destra invece
+   * della propria altezza naturale, ritagliando con `object-fit: cover`.
+   * Passato a `ZoomMedia`, che lo applica solo al proprio stato `full`.
+   */
+  matchHeight?: boolean;
+}
+
+/**
+ * Configurazione della colonna sinistra per-layout. `gallery`: la copertina
+ * resta ancorata in basso mentre la colonna destra, più alta, scorre.
+ * `double`: le due immagini devono avere la stessa altezza — lo decide il
+ * proprietario del progetto, non le proporzioni naturali dei due Media.
+ */
+const LEFT_COLUMN_CONFIG: { [K in RightColumnLayout]?: LeftColumnConfig } = {
+  gallery: { className: "nav:self-end nav:sticky nav:bottom-0" },
+  double: { matchHeight: true },
 };
 
 /**
@@ -68,10 +84,10 @@ export function renderRightColumn(
 }
 
 /**
- * Classe della colonna sinistra per l'item corrente. Il guscio la applica
- * senza sapere per quale layout: la conoscenza resta qui, nel registro.
+ * Configurazione della colonna sinistra per l'item corrente. Il guscio la
+ * applica senza sapere per quale layout: la conoscenza resta qui, nel registro.
  */
-export function getLeftColumnClassName(item: MoodItem): string | undefined {
-  if (item.modal === "zoom") return undefined;
-  return LEFT_COLUMN_CLASSES[item.modal];
+export function getLeftColumnConfig(item: MoodItem): LeftColumnConfig {
+  if (item.modal === "zoom") return {};
+  return LEFT_COLUMN_CONFIG[item.modal] ?? {};
 }

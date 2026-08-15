@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 import type { DetailMedium } from "@/lib/moodboard/source";
+import { cn } from "@/lib/utils";
 
 import { CURSOR_HIDDEN, type CursorLabel } from "./modal-contracts";
 
@@ -19,6 +20,14 @@ interface ColumnMediumProps {
    * destra in un numero diverso di celle.
    */
   sizes: string;
+  /**
+   * Se vero, il Medium riempie l'altezza della colonna (che la griglia del
+   * guscio ha già steso alla cella più alta) e ritaglia con
+   * `object-fit: cover`, invece dell'altezza naturale — usato da `double`,
+   * dove le due immagini devono avere la stessa altezza. `gallery` non lo
+   * passa: le sue celle restano alla loro altezza naturale.
+   */
+  matchHeight?: boolean;
 }
 
 /**
@@ -26,10 +35,18 @@ interface ColumnMediumProps {
  * `OPEN LINK`; senza, è inerte e il cursore sparisce — mostrare `CLOSE` su
  * qualcosa che ferma il click sarebbe una promessa non mantenuta.
  */
-export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: ColumnMediumProps) {
+export function ColumnMedium({
+  item,
+  onCursorLabel,
+  priority = false,
+  sizes,
+  matchHeight = false,
+}: ColumnMediumProps) {
   const { media, href } = item;
   const label = href ? "OPEN LINK" : CURSOR_HIDDEN;
   const isPointerInside = useRef(false);
+  const visualClassName = cn("select-none", "h-auto w-full", matchHeight && "nav:h-full nav:object-cover");
+  const wrapperClassName = cn("block", matchHeight && "nav:h-full");
 
   // Se l'etichetta cambia mentre il puntatore è fermo sopra (React che
   // riusa l'istanza per un DetailMedium diverso), va ripubblicata.
@@ -51,7 +68,7 @@ export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: C
         sizes={sizes}
         priority={priority}
         loading={priority ? undefined : "lazy"}
-        className="h-auto w-full select-none"
+        className={visualClassName}
       />
     ) : (
       <video
@@ -66,7 +83,7 @@ export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: C
         // Non prioritario: nessun preload né autoplay finché non serve.
         autoPlay={priority}
         preload={priority ? "auto" : "none"}
-        className="h-auto w-full select-none"
+        className={visualClassName}
       />
     );
 
@@ -85,7 +102,7 @@ export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: C
     return (
       // Inerte per davvero: ferma il click, così il cursore invisibile non
       // nasconde una chiusura inattesa del modale.
-      <div {...pointerProps} onClick={(event) => event.stopPropagation()} className="block">
+      <div {...pointerProps} onClick={(event) => event.stopPropagation()} className={wrapperClassName}>
         {visual}
       </div>
     );
@@ -99,7 +116,7 @@ export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: C
       {...pointerProps}
       // Il click apre il Link, non chiude il modale.
       onClick={(event) => event.stopPropagation()}
-      className="block"
+      className={wrapperClassName}
     >
       {visual}
     </a>
