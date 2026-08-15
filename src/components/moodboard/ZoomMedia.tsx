@@ -59,6 +59,13 @@ export function ZoomMedia({ media, onCursorLabel, matchHeight = false, isStatic 
   // corrisponde a un'azione reale è un trabocchetto.
   const label = isStatic ? CURSOR_HIDDEN : isFit ? "ZOOM" : "FIT";
   const showFit = !isStatic && isFit;
+  // `isStatic` è vero esattamente quando esiste una colonna destra, cioè
+  // esattamente quando la copertina occupa metà viewport da `nav:` in su
+  // (double, gallery). In `zoom` occupa l'intera viewport. La media query non
+  // può leggere il custom property `--breakpoint-nav`: i custom property non
+  // sono validi in un media feature, quindi il valore reale (1000px) è
+  // scritto qui alla lettera invece che tramite token.
+  const sizes = isStatic ? "(min-width: 1000px) 50vw, 100vw" : "100vw";
 
   // Se lo stato cambia con il puntatore fermo, va aggiornata anche l'etichetta.
   useEffect(() => {
@@ -101,7 +108,7 @@ export function ZoomMedia({ media, onCursorLabel, matchHeight = false, isStatic 
         alt={media.alt}
         width={media.width}
         height={media.height}
-        sizes="100vw"
+        sizes={sizes}
         priority
         className={cn(
           "select-none",

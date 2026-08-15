@@ -20,8 +20,10 @@ export function GalleryColumn({ item, onCursorLabel }: ModalColumnProps<"gallery
           onCursorLabel={onCursorLabel}
           priority={index === 0}
           // Colonna destra a 50vw, divisa in 3: ogni cella è circa 1/6 della
-          // viewport da `nav:` in su, 1/3 sotto (colonna destra a tutta larghezza).
-          sizes="(min-width: 64rem) 16.6667vw, 33.3333vw"
+          // viewport da `nav:` (1000px) in su, 1/3 sotto (colonna destra a
+          // tutta larghezza). Valore alla lettera per lo stesso motivo di
+          // DoubleColumn: i media feature non leggono i custom property.
+          sizes="(min-width: 1000px) 16.6667vw, 33.3333vw"
         />
       ))}
     </div>

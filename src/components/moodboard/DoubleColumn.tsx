@@ -21,8 +21,10 @@ export function DoubleColumn({ item, onCursorLabel }: ModalColumnProps<"double">
         item={medium}
         onCursorLabel={onCursorLabel}
         priority
-        // La colonna occupa metà viewport da `nav:` in su, tutta sotto.
-        sizes="(min-width: 64rem) 50vw, 100vw"
+        // La colonna occupa metà viewport da `nav:` (1000px) in su, tutta
+        // sotto. Valore alla lettera: i media feature non leggono i custom
+        // property, quindi `--breakpoint-nav` non è esprimibile qui.
+        sizes="(min-width: 1000px) 50vw, 100vw"
         // Le due immagini di `double` devono avere la stessa altezza.
         matchHeight
       />
