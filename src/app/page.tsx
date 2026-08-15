@@ -2,9 +2,9 @@ import { MoodboardGrid } from "@/components/moodboard/MoodboardGrid";
 import { getAllMoodItems } from "@/lib/moodboard/source";
 
 /**
- * The Femmina Prime moodboard: an editorial grid of Tiles, each opening a
- * products preview. Content is read on the server through the moodboard
- * source and handed to the grid as props.
+ * La moodboard di Femmina Prime: una griglia editoriale di Tile, ognuna
+ * apre un'anteprima. I contenuti sono letti sul server attraverso la
+ * sorgente della moodboard e passati alla griglia come props.
  */
 export default async function Home() {
   const items = await getAllMoodItems();

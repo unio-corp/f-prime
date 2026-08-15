@@ -1,12 +1,12 @@
 import type { SVGProps } from "react";
 
 /**
- * Shared SVG icons.
+ * Icone SVG condivise.
  */
 
 type IconProps = SVGProps<SVGSVGElement>;
 
-/** Close control of the products preview modal. */
+/** Comando di chiusura del modale di anteprima. */
 export function CloseIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>

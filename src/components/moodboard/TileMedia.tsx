@@ -8,16 +8,19 @@ import type { MoodboardMedia } from "@/types/moodboard";
 
 interface TileMediaProps {
   media: MoodboardMedia;
-  /** `fill` covers the cell (grid tiles); `intrinsic` keeps the aspect ratio (modal). */
-  layout?: "fill" | "intrinsic";
+  /**
+   * `fill` copre la cella (Tile della griglia); `natural` rende a tutta
+   * larghezza con l'altezza che segue le proporzioni del Medium.
+   */
+  layout?: "fill" | "natural";
   sizes?: string;
   priority?: boolean;
   className?: string;
 }
 
 /**
- * Media wrapper for a Tile. Videos autoplay, loop and are muted; images use
- * `object-fit: cover`.
+ * Contenitore del Medium di una Tile. I video partono da soli, sono in loop
+ * e senza audio; le immagini usano `object-fit: cover`.
  */
 export function TileMedia({
   media,
@@ -29,8 +32,9 @@ export function TileMedia({
   const isFill = layout === "fill";
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Playback follows `prefers-reduced-motion`: videos pause (and resume)
-  // with the user's motion preference rather than playing unconditionally.
+  // La riproduzione segue `prefers-reduced-motion`: i video si mettono in
+  // pausa (e riprendono) secondo la preferenza di movimento dell'utente,
+  // invece di riprodursi sempre.
   useEffect(() => {
     if (media.kind !== "video") return;
 
@@ -44,7 +48,7 @@ export function TileMedia({
         videoEl.pause();
       } else {
         void videoEl.play().catch(() => {
-          // Autoplay can be rejected by the browser; ignore, poster still shows.
+          // Il browser può rifiutare l'autoplay: ignoriamo, resta il poster.
         });
       }
     };
@@ -54,17 +58,13 @@ export function TileMedia({
     return () => mediaQuery.removeEventListener("change", syncPlayback);
   }, [media.kind]);
 
-  // `fill`: the wrapper is sized by the grid tile it lives in, and it drives
-  // that size onto its children (h-full/w-full + overflow-hidden).
-  // `intrinsic`: the reverse — the wrapper must NEVER impose a size of its
-  // own (no aspect-ratio box, no width-derived height). It has to fit
-  // whatever the parent (e.g. a `1fr` modal grid track) hands it, bounded by
-  // max-width/max-height so it never grows past that allotment and starves
-  // sibling tracks. `max-h-full`/`max-w-full` here is what lets the modal's
-  // `className="max-h-full"` actually bite.
+  // `fill`: il contenitore prende la dimensione dalla Tile che lo ospita e
+  // la impone ai figli (h-full/w-full + overflow-hidden).
+  // `natural`: il contenitore non impone nulla. Il Medium occupa la larghezza
+  // disponibile e l'altezza segue le sue proporzioni, così la colonna scorre
+  // invece di aggiungere bande vuote.
   const wrapperClassName = cn(
-    "relative grid h-full w-full",
-    isFill ? "overflow-hidden" : "max-h-full max-w-full overflow-hidden",
+    isFill ? "relative grid h-full w-full overflow-hidden" : "w-full",
     className,
   );
 
@@ -73,10 +73,11 @@ export function TileMedia({
       <div className={wrapperClassName}>
         <video
           ref={videoRef}
-          className={cn(
-            "absolute top-0 left-0 h-full w-full",
-            isFill ? "object-cover" : "object-contain",
-          )}
+          className={
+            isFill ? "absolute top-0 left-0 h-full w-full object-cover" : "h-auto w-full"
+          }
+          width={isFill ? undefined : media.width}
+          height={isFill ? undefined : media.height}
           src={media.src}
           poster={media.poster}
           autoPlay
@@ -90,6 +91,22 @@ export function TileMedia({
     );
   }
 
+  if (!isFill) {
+    return (
+      <div className={wrapperClassName}>
+        <Image
+          src={media.src}
+          alt={media.alt}
+          width={media.width}
+          height={media.height}
+          sizes={sizes}
+          priority={priority}
+          className="h-auto w-full"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={wrapperClassName}>
       <Image
@@ -98,7 +115,7 @@ export function TileMedia({
         fill
         sizes={sizes}
         priority={priority}
-        className={isFill ? "object-cover" : "object-contain"}
+        className="object-cover"
       />
     </div>
   );
