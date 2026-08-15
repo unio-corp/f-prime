@@ -11,7 +11,7 @@ complete: Tiles are added editorially over time until the grid is filled.
 
 ## Tile
 
-One cell of the Moodboard: a Medium and a Text, plus the Text's Provenance.
+One cell of the Moodboard: one or more Media and a Text, plus the Text's Provenance.
 A Tile also holds a Position.
 
 ## Position
