@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* magdabutrym.com's own breakpoints, so cloned components can use `mini:`,
-     `tab:`, `nav:` and `wide:` instead of Tailwind's defaults. */
+  /* I breakpoint propri della moodboard: i componenti usano `mini:`, `tab:`,
+     `nav:` e `wide:` invece di quelli predefiniti di Tailwind. */
   --breakpoint-mini: 420px;
   --breakpoint-tab: 740px;
   --breakpoint-nav: 1000px;
@@ -137,32 +137,32 @@
 }
 
 /* ---------------------------------------------------------------------------
- * Design tokens
+ * Design token
  *
- * Every visual value used by the moodboard lives here, grouped as colour,
- * typography, spacing, radius and motion. Components reference the tokens
- * through their Tailwind utilities (`bg-fp-cream`, `text-fp-detail`,
- * `h-fp-action`, …) instead of restating raw px/hex values.
+ * Ogni valore visivo usato dalla moodboard vive qui, raggruppato in colore,
+ * tipografia, spaziatura, radius e motion. I componenti usano i token
+ * attraverso le utility Tailwind (`bg-fp-cream`, `text-fp-detail`,
+ * `h-fp-action`, …) invece di ripetere valori px/hex grezzi.
  *
- * Values under `fp-*` are the ones measured on the cloned target site and are
- * kept verbatim; renaming or retuning them is a customisation decision.
+ * Ritoccare un valore qui lo ritocca ovunque sia usato: è una decisione di
+ * design deliberata, non un aggiustamento locale.
  * ------------------------------------------------------------------------- */
 
 @theme {
-  /* -- Colour ------------------------------------------------------------ */
+  /* -- Colore ------------------------------------------------------------ */
   --color-fp-cream: #fcfaf7;
   --color-fp-white: #fff;
   --color-fp-black: #000;
   --color-fp-muted: #9e9e9e;
   --color-fp-focus: #0071e3;
-  /* Modal grounds: the wide-viewport backdrop and the product image plate. */
+  /* Fondali del modale: backdrop sulle viewport larghe e piano immagine. */
   --color-fp-surface: #f5f3ef;
   --color-fp-surface-sunken: #f0eeea;
 
-  /* -- Typography -------------------------------------------------------- */
+  /* -- Tipografia -------------------------------------------------------- */
   --font-fp-sans: "MB Sans", "MB Sans Fallback", sans-serif;
   --font-fp-serif: "MB Serif", "MB Serif Fallback", sans-serif;
-  /* Price and "View details": 13px on a 25px rhythm. */
+  /* Dettagli di testo minori: 13px su un ritmo di 25px. */
   --text-fp-detail: 13px;
   --text-fp-detail--line-height: 1.9230769231;
   --text-fp-cap: 0.8rem;
@@ -170,8 +170,8 @@
   --leading-fp-title: 1.25;
   --leading-fp-action: 1.5;
 
-  /* -- Spacing ----------------------------------------------------------- */
-  /* `.Container_wrap` side margins, one step per breakpoint. */
+  /* -- Spaziatura -------------------------------------------------------- */
+  /* Margini laterali del contenitore, uno scalino per breakpoint. */
   --spacing-fp-gutter: 30px;
   --spacing-fp-gutter-tab: 36px;
   --spacing-fp-gutter-nav: 46px;
@@ -182,12 +182,12 @@
   --spacing-fp-media-min: 100px;
   --spacing-fp-modal-fold: 110px;
   --spacing-fp-product-column: 800px;
-  /* Zero-width flex spacers that keep the mobile scroller centred. */
+  /* Distanziatori a larghezza nulla che tengono centrato lo scroller mobile. */
   --spacing-fp-hairline: 0.1px;
   --spacing-fp-ring: 2px;
 
   /* -- Radius ------------------------------------------------------------ */
-  /* Caps on the shadcn radius scale for the two smallest button sizes. */
+  /* Limiti sulla scala radius di shadcn per le due misure di pulsante minori. */
   --radius-fp-cap-xs: 10px;
   --radius-fp-cap-sm: 12px;
 
@@ -196,17 +196,18 @@
 }
 
 /* ---------------------------------------------------------------------------
- * Site: www.magdabutrym.com — page: /it-en/moodboard-official
- * Self-hosted fonts copied verbatim from the target site. Page styling is
- * scoped to `.fp-site` so other routes keep the shadcn defaults above.
+ * Tipografia e guscio di pagina della moodboard
+ *
+ * Font self-hosted, più lo stile circoscritto a `.fp-site` così le altre
+ * route mantengono i valori predefiniti di shadcn qui sopra.
  * ------------------------------------------------------------------------- */
 
 @font-face {
   font-family: "MB Sans";
   src:
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/sans.woff2")
+    url("/moodboard/fonts/sans.woff2")
       format("woff2"),
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/sans.woff")
+    url("/moodboard/fonts/sans.woff")
       format("woff");
   font-display: swap;
   font-weight: 400;
@@ -224,7 +225,7 @@
 @font-face {
   font-family: "MB Serif";
   src:
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif.woff")
+    url("/moodboard/fonts/serif.woff")
       format("woff");
   font-display: swap;
   font-weight: 400;
@@ -233,7 +234,7 @@
 @font-face {
   font-family: "MB Serif";
   src:
-    url("/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/serif-italic.woff")
+    url("/moodboard/fonts/serif-italic.woff")
       format("woff");
   font-display: swap;
   font-weight: 400;
@@ -258,7 +259,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Container side margins — the site's `.Container_wrap` scale. */
+/* Margini laterali del contenitore: il ritmo orizzontale della moodboard. */
 .fp-container {
   margin-left: var(--spacing-fp-gutter);
   margin-right: var(--spacing-fp-gutter);
@@ -285,7 +286,7 @@
   }
 }
 
-/* The target site enables smooth scrolling globally. */
+/* Lo scorrimento morbido è attivo su tutta la moodboard. */
 html:has(.fp-site) {
   background-color: var(--color-fp-cream);
   scroll-behavior: smooth;

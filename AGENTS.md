@@ -16,17 +16,14 @@ an editorial grid of Tiles, each pairing a Medium (image or video) with a Text
 and its Provenance. Domain vocabulary lives in `CONTEXT.md` — read it before
 naming anything.
 
-The current UI started as a clone of the moodboard section of
-`magdabutrym.com/it-en/moodboard-official`. The emulation phase is over: the
-codebase is now in **customisation**, where the cloned layout is progressively
-reshaped into Femmina Prime's own product. Cloned components still live under
-`src/components/sites/<host>/<page>/` and keep their original structure until
-they are rewritten.
+The codebase is in **customisation**: the grid is progressively reshaped into
+Femmina Prime's own product. Moodboard components live in
+`src/components/moodboard/`, their data and its source in `src/lib/moodboard/`.
 
 ## Tech Stack
 - **Framework:** Next.js 16 (App Router, React 19, TypeScript strict)
 - **UI:** shadcn/ui (Base UI primitives, Tailwind CSS v4, `cn()` utility)
-- **Icons:** extracted SVGs in `src/components/sites/<host>/shared/icons.tsx`; Lucide React for the rest
+- **Icons:** shared SVGs in `src/components/icons.tsx`; Lucide React for the rest
 - **Styling:** Tailwind CSS v4 with oklch design tokens
 - **Deployment:** Vercel (`unio-root/f-prime`)
 
@@ -48,8 +45,11 @@ they are rewritten.
 ## Design Principles
 - **Domain first** — names in code match `CONTEXT.md`. A cell is a Tile, not a card.
 - **Real content** — actual Texts and Media, never placeholders.
-- **Customisation over emulation** — the clone is a starting point, not a target.
-  Diverge from the source deliberately, and record the decision in `docs/adr/`.
+- **One source of content** — `src/lib/moodboard/source.ts` is the only module
+  that knows where content comes from. Components import `getAllMoodItems()` /
+  `getMoodItem(slug)` from it, never the data files. Sanity replaces the inside
+  of that module and nothing else.
+- **Record decisions** — architectural choices go in `docs/adr/`.
 - **Beauty-first** — every pixel matters.
 
 ## Project Structure
@@ -57,23 +57,25 @@ they are rewritten.
 src/
   app/                  # Next.js routes
   components/
-    sites/<host>/       # Components cloned per source page (+ shared/ icons)
+    moodboard/          # Grid, Tile, media, products modal
     ui/                 # shadcn/ui primitives
-  lib/utils.ts          # cn() utility (shadcn)
+    icons.tsx           # Shared SVG icons
+  lib/
+    moodboard/          # Content data + source.ts (the only content entry point)
+    utils.ts            # cn() utility (shadcn)
   types/moodboard.ts    # Tile, Medium, Provenance …
   hooks/
 public/
-  sites/<host>/<page>/  # Cloned assets: images, videos, fonts, seo
+  moodboard/            # Assets: images, videos, fonts, seo
 docs/
   adr/                  # Architecture decision records
   agents/               # Agent workflow docs
-  design-references/    # Screenshots of the source page, for visual diffing
 CONTEXT.md              # Ubiquitous language (glossary only)
 ```
 
 ## MOST IMPORTANT NOTES
 - When launching Claude Code agent teams, ALWAYS have each teammate work in their own worktree branch and merge everyone's work at the end, resolving any merge conflicts smartly since you are basically serving the orchestrator role and have full context to our goals, work given, work achieved, and desired outcomes.
-- `public/sites/` holds ~90 MB of cloned media (mostly video). Do not add more
+- `public/moodboard/` holds ~90 MB of media (mostly video). Do not add more
   large binaries without asking — consider Vercel Blob instead.
 
 ## Agent skills

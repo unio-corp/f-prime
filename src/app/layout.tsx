@@ -29,7 +29,7 @@ export default function RootLayout({
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
-          href="/sites/www-magdabutrym-com-f039a414/it-en-moodboard-official-834833dd/fonts/sans.woff2"
+          href="/moodboard/fonts/sans.woff2"
         />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
