@@ -20,14 +20,6 @@ interface ColumnMediumProps {
    * destra in un numero diverso di celle.
    */
   sizes: string;
-  /**
-   * Se vero, il Medium riempie l'altezza della colonna (che la griglia del
-   * guscio ha già steso alla cella più alta) e ritaglia con
-   * `object-fit: cover`, invece dell'altezza naturale — usato da `double`,
-   * dove le due immagini devono avere la stessa altezza. `gallery` non lo
-   * passa: le sue celle restano alla loro altezza naturale.
-   */
-  matchHeight?: boolean;
 }
 
 /**
@@ -35,18 +27,12 @@ interface ColumnMediumProps {
  * `OPEN LINK`; senza, è inerte e il cursore sparisce — mostrare `CLOSE` su
  * qualcosa che ferma il click sarebbe una promessa non mantenuta.
  */
-export function ColumnMedium({
-  item,
-  onCursorLabel,
-  priority = false,
-  sizes,
-  matchHeight = false,
-}: ColumnMediumProps) {
+export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: ColumnMediumProps) {
   const { media, href } = item;
   const label = href ? "OPEN LINK" : CURSOR_HIDDEN;
   const isPointerInside = useRef(false);
-  const visualClassName = cn("select-none", "h-auto w-full", matchHeight && "nav:h-full nav:object-cover");
-  const wrapperClassName = cn("block", matchHeight && "nav:h-full");
+  const visualClassName = cn("select-none", "h-auto w-full");
+  const wrapperClassName = "block";
 
   // Se l'etichetta cambia mentre il puntatore è fermo sopra (React che
   // riusa l'istanza per un DetailMedium diverso), va ripubblicata.

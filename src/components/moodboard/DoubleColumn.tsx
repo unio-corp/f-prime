@@ -25,8 +25,6 @@ export function DoubleColumn({ item, onCursorLabel }: ModalColumnProps<"double">
         // sotto. Valore alla lettera: i media feature non leggono i custom
         // property, quindi `--breakpoint-nav` non è esprimibile qui.
         sizes="(min-width: 1000px) 50vw, 100vw"
-        // Le due immagini di `double` devono avere la stessa altezza.
-        matchHeight
       />
     </div>
   );

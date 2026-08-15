@@ -7,7 +7,7 @@ import type { MoodItem } from "@/lib/moodboard/source";
 import { cn } from "@/lib/utils";
 
 import { CURSOR_HIDDEN } from "./modal-contracts";
-import { getLeftColumnConfig, renderRightColumn } from "./modal-layouts";
+import { renderRightColumn } from "./modal-layouts";
 import { ZoomMedia } from "./ZoomMedia";
 
 interface MoodModalProps {
@@ -37,7 +37,6 @@ export function MoodModal({ item, onClose }: MoodModalProps) {
   const setCursorLabel = useCallback((label: string | null) => setContentLabel(label), []);
 
   const rightColumn = renderRightColumn(item, setCursorLabel);
-  const leftColumnConfig = getLeftColumnConfig(item);
 
   useEffect(() => {
     // Catturato prima che il focus entri nel modale: è il pulsante della Tile
@@ -137,19 +136,8 @@ export function MoodModal({ item, onClose }: MoodModalProps) {
         )}
       >
         {/* Nessun padding: il Medium arriva a filo. ZoomMedia ferma il proprio
-            click, così ciò che gli sta accanto resta backdrop. La classe della
-            colonna sinistra arriva dal registro dei layout: il guscio non sa
-            per quale layout la applica. La copertina è statica ogni volta che
-            esiste una colonna destra: il guscio lo sa già, da `rightColumn`,
-            senza bisogno di conoscere il nome del layout. */}
-        <div className={leftColumnConfig.className}>
-          <ZoomMedia
-            media={item.media}
-            onCursorLabel={setCursorLabel}
-            matchHeight={leftColumnConfig.matchHeight}
-            isStatic={Boolean(rightColumn)}
-          />
-        </div>
+            click, così ciò che gli sta accanto resta backdrop. */}
+        <ZoomMedia media={item.media} onCursorLabel={setCursorLabel} />
 
         {/* Nessun wrapper che fermi il click: ogni Medium della colonna decide
             da sé se il click gli appartiene o se deve chiudere il modale. */}

@@ -18,32 +18,6 @@ export const RIGHT_COLUMN_RENDERERS: {
 } = { double: DoubleColumn, gallery: GalleryColumn };
 
 /**
- * Ciò che il guscio deve sapere sulla colonna sinistra (la copertina, che
- * comunque rende lui) per un dato layout — senza saperne il nome.
- */
-interface LeftColumnConfig {
-  /** Classe applicata al div che avvolge `ZoomMedia`. */
-  className?: string;
-  /**
-   * Se vero, la copertina condivide l'altezza della colonna destra invece
-   * della propria altezza naturale, ritagliando con `object-fit: cover`.
-   * Passato a `ZoomMedia`, che lo applica solo al proprio stato `full`.
-   */
-  matchHeight?: boolean;
-}
-
-/**
- * Configurazione della colonna sinistra per-layout. `gallery`: la copertina
- * resta ancorata in basso mentre la colonna destra, più alta, scorre.
- * `double`: le due immagini devono avere la stessa altezza — lo decide il
- * proprietario del progetto, non le proporzioni naturali dei due Media.
- */
-const LEFT_COLUMN_CONFIG: { [K in RightColumnLayout]?: LeftColumnConfig } = {
-  gallery: { className: "nav:self-end nav:sticky nav:bottom-0" },
-  double: { matchHeight: true },
-};
-
-/**
  * Risolve il layout effettivamente reso. I dati incoerenti non arrivano più
  * fin qui — li ferma `toMoodItem()` — quindi resta un solo caso: dati validi
  * per un layout il cui renderer non è ancora scritto.
@@ -81,13 +55,4 @@ export function renderRightColumn(
   }>;
 
   return <Renderer item={item} onCursorLabel={onCursorLabel} />;
-}
-
-/**
- * Configurazione della colonna sinistra per l'item corrente. Il guscio la
- * applica senza sapere per quale layout: la conoscenza resta qui, nel registro.
- */
-export function getLeftColumnConfig(item: MoodItem): LeftColumnConfig {
-  if (item.modal === "zoom") return {};
-  return LEFT_COLUMN_CONFIG[item.modal] ?? {};
 }
