@@ -24,11 +24,24 @@ that seat sits in.
 
 ## Medium
 
-The image or video shown on a Tile. The same Medium is reused, unchanged, in
-the Tile's detail view — a Tile never carries a second, alternative image.
+The image or video shown on a Tile. A Tile carries one or more Media, in order:
+the first is the one the Moodboard shows in the grid, and the detail view opens
+on that same Medium, unchanged. The Media that follow appear only in the detail
+view.
 
-Media are produced editorially. They are not screenshots or downloads of
-social posts, even when the Text beside them comes from one.
+Media are produced editorially. They are not screenshots or downloads of social
+posts, even when the Text beside them comes from one.
+
+## Detail view
+
+What a Tile opens into: the Tile's Media, shown large. Which layout the detail
+view uses is a property of the Tile, never a choice the reader makes.
+
+## Link
+
+An optional destination carried by a Medium in the detail view. A Medium with a
+Link opens it in a new tab; a Medium without one does nothing. The Medium shown
+in the grid never carries a Link.
 
 ## Text
 
