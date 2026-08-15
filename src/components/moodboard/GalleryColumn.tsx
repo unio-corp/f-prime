@@ -24,6 +24,8 @@ export function GalleryColumn({ item, onCursorLabel }: ModalColumnProps<"gallery
           // tutta larghezza). Valore alla lettera per lo stesso motivo di
           // DoubleColumn: i media feature non leggono i custom property.
           sizes="(min-width: 1000px) 16.6667vw, 33.3333vw"
+          aspectClassName="aspect-[2/3]"
+          showNativeCursorWhenInert
         />
       ))}
     </div>

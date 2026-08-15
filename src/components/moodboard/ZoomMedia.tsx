@@ -1,61 +1,53 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 
 import { useCursorLabel } from "@/hooks/useCursorLabel";
 import { cn } from "@/lib/utils";
 import type { MoodboardMedia } from "@/types/moodboard";
 
+import { CURSOR_HIDDEN } from "./modal-contracts";
+
 interface ZoomMediaProps {
   media: MoodboardMedia;
-  /** Permette al guscio di etichettare il cursore mentre il puntatore è sull'immagine. */
   onCursorLabel: (label: string | null) => void;
+  /**
+   * Se vero, limita l'altezza a `110dvh` e ritaglia con `object-fit: cover`
+   * invece dell'altezza naturale — richiesto dal layout `gallery`, dove la
+   * copertina condivide la viewport con una colonna destra che può scorrere
+   * più a lungo di lei.
+   */
+  constrainHeight?: boolean;
 }
 
 /**
- * Il Medium in zoom del modale: due stati alternati dal click sull'immagine.
- * - `full` (predefinito): larghezza 100vw, altezza secondo le proporzioni.
- * - `fit`: altezza 100dvh, larghezza auto — l'intero Medium entra
- *   nell'altezza della viewport; unità dinamiche perché le barre del browser
- *   mobile non lo taglino.
- * L'etichetta del cursore nomina lo stato a cui porta il click: FIT quando è
- * a tutta larghezza, ZOOM quando è adattato.
+ * La copertina del modale: un'immagine statica a tutta larghezza. Per
+ * dominio il Medium di griglia non porta mai un Link (CONTEXT.md), quindi
+ * resta inerte — il click ferma la propagazione così non chiude il modale,
+ * ma non fa nient'altro. Il cursore personalizzato del guscio (`CLOSE`)
+ * mentirebbe qui, quindi si nasconde e riappare quello nativo del sistema.
  */
-export function ZoomMedia({ media, onCursorLabel }: ZoomMediaProps) {
-  const [isFit, setIsFit] = useState(false);
-
-  const label = isFit ? "ZOOM" : "FIT";
-  const showFit = isFit;
-  const sizes = "100vw";
-  const pointerProps = useCursorLabel(label, onCursorLabel);
+export function ZoomMedia({ media, onCursorLabel, constrainHeight = false }: ZoomMediaProps) {
+  const pointerProps = useCursorLabel(CURSOR_HIDDEN, onCursorLabel);
 
   return (
-    <button
-      type="button"
-      aria-label={showFit ? "Fit image to width" : "Fit image to height"}
-      onClick={(event) => {
-        // Tiene il click lontano dal backdrop: non deve mai chiudere il modale.
-        event.stopPropagation();
-        setIsFit((previous) => !previous);
-      }}
+    <div
       {...pointerProps}
-      // In `fit` il pulsante avvolge l'immagine, così le bande laterali
-      // restano backdrop: chiudono il modale e mostrano il cursore CLOSE.
-      className={cn("block", showFit ? "mx-auto w-auto" : "w-full")}
+      onClick={(event) => event.stopPropagation()}
+      className="block [@media(pointer:fine)]:cursor-auto"
     >
       <Image
         src={media.src}
         alt={media.alt}
         width={media.width}
         height={media.height}
-        sizes={sizes}
+        sizes="100vw"
         priority
         className={cn(
-          "select-none",
-          showFit ? "inline-block h-[100dvh] w-auto max-w-none" : "h-auto w-full",
+          "h-auto w-full select-none",
+          constrainHeight && "max-h-[110dvh] object-cover",
         )}
       />
-    </button>
+    </div>
   );
 }

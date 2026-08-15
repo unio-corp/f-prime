@@ -137,7 +137,11 @@ export function MoodModal({ item, onClose }: MoodModalProps) {
       >
         {/* Nessun padding: il Medium arriva a filo. ZoomMedia ferma il proprio
             click, così ciò che gli sta accanto resta backdrop. */}
-        <ZoomMedia media={item.media} onCursorLabel={setCursorLabel} />
+        <ZoomMedia
+          media={item.media}
+          onCursorLabel={setCursorLabel}
+          constrainHeight={item.modal === "gallery"}
+        />
 
         {/* Nessun wrapper che fermi il click: ogni Medium della colonna decide
             da sé se il click gli appartiene o se deve chiudere il modale. */}

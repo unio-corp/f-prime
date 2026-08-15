@@ -20,6 +20,21 @@ interface ColumnMediumProps {
    * destra in un numero diverso di celle.
    */
   sizes: string;
+  /**
+   * Classe Tailwind `aspect-[…]` completa, passata alla lettera dal layout
+   * chiamante (Tailwind non risolve classi ricomposte a runtime). Se
+   * presente, il Medium riempie il riquadro e ritaglia con
+   * `object-fit: cover` invece dell'altezza naturale — richiesto da
+   * `GalleryColumn`. Assente, il Medium mantiene le sue proporzioni.
+   */
+  aspectClassName?: string;
+  /**
+   * Se vero, un Medium senza `href` mostra il cursore nativo del sistema
+   * invece di nasconderlo del tutto — richiesto da `GalleryColumn`, dove le
+   * celle senza Link sono affiancate a quelle con Link e "nessun cursore"
+   * leggerebbe come un errore di caricamento più che come inerzia voluta.
+   */
+  showNativeCursorWhenInert?: boolean;
 }
 
 /**
@@ -27,11 +42,21 @@ interface ColumnMediumProps {
  * `OPEN LINK`; senza, è inerte e il cursore sparisce — mostrare `CLOSE` su
  * qualcosa che ferma il click sarebbe una promessa non mantenuta.
  */
-export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: ColumnMediumProps) {
+export function ColumnMedium({
+  item,
+  onCursorLabel,
+  priority = false,
+  sizes,
+  aspectClassName,
+  showNativeCursorWhenInert = false,
+}: ColumnMediumProps) {
   const { media, href } = item;
   const label = href ? "OPEN LINK" : CURSOR_HIDDEN;
-  const visualClassName = cn("select-none", "h-auto w-full");
-  const wrapperClassName = "block";
+  const visualClassName = cn(
+    "select-none",
+    aspectClassName ? "h-full w-full object-cover" : "h-auto w-full",
+  );
+  const wrapperClassName = cn("block", aspectClassName);
   const pointerProps = useCursorLabel(label, onCursorLabel);
 
   const visual =
@@ -67,7 +92,11 @@ export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: C
     return (
       // Inerte per davvero: ferma il click, così il cursore invisibile non
       // nasconde una chiusura inattesa del modale.
-      <div {...pointerProps} onClick={(event) => event.stopPropagation()} className={wrapperClassName}>
+      <div
+        {...pointerProps}
+        onClick={(event) => event.stopPropagation()}
+        className={cn(wrapperClassName, showNativeCursorWhenInert && "[@media(pointer:fine)]:cursor-auto")}
+      >
         {visual}
       </div>
     );
