@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
+import { useCursorLabel } from "@/hooks/useCursorLabel";
 import { cn } from "@/lib/utils";
 import type { MoodboardMedia } from "@/types/moodboard";
 
@@ -23,19 +24,11 @@ interface ZoomMediaProps {
  */
 export function ZoomMedia({ media, onCursorLabel }: ZoomMediaProps) {
   const [isFit, setIsFit] = useState(false);
-  const isPointerInside = useRef(false);
 
   const label = isFit ? "ZOOM" : "FIT";
   const showFit = isFit;
   const sizes = "100vw";
-
-  // Se lo stato cambia con il puntatore fermo, va aggiornata anche l'etichetta.
-  useEffect(() => {
-    if (isPointerInside.current) onCursorLabel(label);
-  }, [label, onCursorLabel]);
-
-  // Lasciare l'immagine (unmount, chiusura) non deve lasciare l'etichetta appesa.
-  useEffect(() => () => onCursorLabel(null), [onCursorLabel]);
+  const pointerProps = useCursorLabel(label, onCursorLabel);
 
   return (
     <button
@@ -46,14 +39,7 @@ export function ZoomMedia({ media, onCursorLabel }: ZoomMediaProps) {
         event.stopPropagation();
         setIsFit((previous) => !previous);
       }}
-      onPointerEnter={() => {
-        isPointerInside.current = true;
-        onCursorLabel(label);
-      }}
-      onPointerLeave={() => {
-        isPointerInside.current = false;
-        onCursorLabel(null);
-      }}
+      {...pointerProps}
       // In `fit` il pulsante avvolge l'immagine, così le bande laterali
       // restano backdrop: chiudono il modale e mostrano il cursore CLOSE.
       className={cn("block", showFit ? "mx-auto w-auto" : "w-full")}

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 
+import { useCursorLabel } from "@/hooks/useCursorLabel";
 import type { DetailMedium } from "@/lib/moodboard/source";
 import { cn } from "@/lib/utils";
 
@@ -30,19 +30,9 @@ interface ColumnMediumProps {
 export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: ColumnMediumProps) {
   const { media, href } = item;
   const label = href ? "OPEN LINK" : CURSOR_HIDDEN;
-  const isPointerInside = useRef(false);
   const visualClassName = cn("select-none", "h-auto w-full");
   const wrapperClassName = "block";
-
-  // Se l'etichetta cambia mentre il puntatore è fermo sopra (React che
-  // riusa l'istanza per un DetailMedium diverso), va ripubblicata.
-  useEffect(() => {
-    if (isPointerInside.current) onCursorLabel(label);
-  }, [label, onCursorLabel]);
-
-  // Smontare il Medium (chiusura, cambio di Tile) non deve lasciare
-  // un'etichetta appesa sul cursore.
-  useEffect(() => () => onCursorLabel(null), [onCursorLabel]);
+  const pointerProps = useCursorLabel(label, onCursorLabel);
 
   const visual =
     media.kind === "image" ? (
@@ -72,17 +62,6 @@ export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: C
         className={visualClassName}
       />
     );
-
-  const pointerProps = {
-    onPointerEnter: () => {
-      isPointerInside.current = true;
-      onCursorLabel(label);
-    },
-    onPointerLeave: () => {
-      isPointerInside.current = false;
-      onCursorLabel(null);
-    },
-  };
 
   if (!href) {
     return (
