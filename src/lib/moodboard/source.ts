@@ -1,38 +1,24 @@
-import type { MoodboardProduct, MoodboardTile } from "@/types/moodboard";
+import type { MoodboardTile } from "@/types/moodboard";
 
-import { MOODBOARD_PRODUCTS } from "./products";
 import { MOODBOARD_TILES } from "./tiles";
+import { toMoodItem } from "./to-mood-item";
 
 /**
- * The single place that knows where moodboard content comes from.
+ * L'unico punto che sa da dove arrivano i contenuti della moodboard.
  *
- * Today it reads the static files in this folder; tomorrow it will query
- * Sanity. Nothing outside this module imports `./tiles` or `./products`, so
- * swapping the backing store stays a change to these two functions.
+ * Oggi legge il file statico in questa cartella; domani interrogherà Sanity.
+ * Nessun modulo esterno importa `./tiles`, quindi cambiare la sorgente resta
+ * una modifica a queste due funzioni. La validazione vive accanto, in
+ * `./to-mood-item`, per restare testabile senza passare dai dati reali.
  */
 
-/** A Tile with its products already resolved — what the UI consumes. */
-export interface MoodItem extends Omit<MoodboardTile, "products"> {
-  /** Stable public identifier. Derived from the id until the CMS supplies one. */
-  slug: string;
-  products: MoodboardProduct[];
-}
+export type { DetailMedium, MoodItem } from "./to-mood-item";
 
-function toMoodItem(tile: MoodboardTile): MoodItem {
-  return {
-    ...tile,
-    slug: `tile-${tile.id}`,
-    products: tile.products
-      .map((handle) => MOODBOARD_PRODUCTS[handle])
-      .filter((product): product is MoodboardProduct => Boolean(product)),
-  };
-}
-
-export async function getAllMoodItems(): Promise<MoodItem[]> {
+export async function getAllMoodItems() {
   return MOODBOARD_TILES.map(toMoodItem);
 }
 
-export async function getMoodItem(slug: string): Promise<MoodItem | null> {
-  const tile = MOODBOARD_TILES.find((candidate) => `tile-${candidate.id}` === slug);
+export async function getMoodItem(slug: string) {
+  const tile = MOODBOARD_TILES.find((candidate: MoodboardTile) => `tile-${candidate.id}` === slug);
   return tile ? toMoodItem(tile) : null;
 }
