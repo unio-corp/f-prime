@@ -18,7 +18,7 @@ export const MOODBOARD_TILES: MoodboardTile[] = [
   {"id":2,"media":{"kind":"image","src":"/moodboard/tiles/tile-2.jpg","width":2249,"height":4000,"alt":""},"modal":"zoom"},
   {"id":3,"media":{"kind":"image","src":"/moodboard/tiles/tile-3.jpg","width":1600,"height":2400,"alt":""},"modal":"zoom"},
   {"id":4,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"double","extraMedia":[{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"href":"https://femminaprime.com"}]},
-  {"id":5,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
+  {"id":5,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"gallery","extraMedia":[{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"href":"https://femminaprime.com"},{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""}},{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2226,"height":2783,"alt":""},"href":"/"}]},
   {"id":6,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"zoom"},
   {"id":7,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},
   {"id":8,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"zoom"},

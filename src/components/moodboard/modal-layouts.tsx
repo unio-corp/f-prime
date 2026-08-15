@@ -3,6 +3,7 @@ import type { ComponentType, ReactNode } from "react";
 import type { MoodItem } from "@/lib/moodboard/source";
 
 import { DoubleColumn } from "./DoubleColumn";
+import { GalleryColumn } from "./GalleryColumn";
 import type { CursorLabel, ModalColumnProps, RightColumnLayout } from "./modal-contracts";
 
 /**
@@ -14,7 +15,7 @@ import type { CursorLabel, ModalColumnProps, RightColumnLayout } from "./modal-c
  */
 export const RIGHT_COLUMN_RENDERERS: {
   [K in RightColumnLayout]?: ComponentType<ModalColumnProps<K>>;
-} = { double: DoubleColumn };
+} = { double: DoubleColumn, gallery: GalleryColumn };
 
 /**
  * Risolve il layout effettivamente reso. I dati incoerenti non arrivano più
