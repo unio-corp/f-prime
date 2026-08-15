@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { MoodboardMedia } from "@/types/moodboard";
 
+import { CURSOR_HIDDEN } from "./modal-contracts";
+
 interface ZoomMediaProps {
   media: MoodboardMedia;
   /** Permette al guscio di etichettare il cursore mentre il puntatore è sull'immagine. */
@@ -19,25 +21,44 @@ interface ZoomMediaProps {
    * senza ritaglio, con le sue proporzioni reali.
    */
   matchHeight?: boolean;
+  /**
+   * Se vero, la copertina è statica: nessun toggle FIT/ZOOM, nessuna
+   * etichetta sul cursore (come un `ColumnMedium` senza `href`), click comunque
+   * fermato perché non deve chiudere il modale. Richiesto ovunque il modale
+   * abbia una colonna destra: ingrandire la copertina lascerebbe bande
+   * laterali vuote, contraddicendo la larghezza 100% della sua colonna.
+   * Quando falso (il layout `zoom`, senza colonna destra), il comportamento è
+   * quello originale e invariato.
+   */
+  isStatic?: boolean;
 }
 
 /**
- * Il Medium in zoom del modale. Due stati, alternati dal click sull'immagine:
+ * Il Medium in zoom del modale.
  *
- * - `full` (predefinito): larghezza 100vw, altezza secondo le proporzioni —
- *   o, con `matchHeight`, l'altezza della colonna, ritagliata.
+ * Quando `isStatic` è falso (layout `zoom`, la maggioranza delle Tile), due
+ * stati alternati dal click sull'immagine:
+ * - `full` (predefinito): larghezza 100vw, altezza secondo le proporzioni.
  * - `fit`: altezza 100dvh, larghezza auto — l'intero Medium entra
  *   nell'altezza della viewport; unità dinamiche perché le barre del browser
- *   mobile non lo taglino. Sempre senza ritaglio, anche con `matchHeight`.
- *
+ *   mobile non lo taglino.
  * L'etichetta del cursore nomina lo stato a cui porta il click: FIT quando è
  * a tutta larghezza, ZOOM quando è adattato.
+ *
+ * Quando `isStatic` è vero (`double`, `gallery`: il modale ha una colonna
+ * destra), il toggle è disattivato: sempre lo stato `full` — con
+ * `matchHeight`, l'altezza della colonna, ritagliata — nessuna etichetta sul
+ * cursore, click comunque fermato per non chiudere il modale.
  */
-export function ZoomMedia({ media, onCursorLabel, matchHeight = false }: ZoomMediaProps) {
+export function ZoomMedia({ media, onCursorLabel, matchHeight = false, isStatic = false }: ZoomMediaProps) {
   const [isFit, setIsFit] = useState(false);
   const isPointerInside = useRef(false);
 
-  const label = isFit ? "ZOOM" : "FIT";
+  // Statica, non c'è nulla da annunciare: la stessa scelta di ColumnMedium
+  // per un Medium senza href, per lo stesso motivo — un'etichetta che non
+  // corrisponde a un'azione reale è un trabocchetto.
+  const label = isStatic ? CURSOR_HIDDEN : isFit ? "ZOOM" : "FIT";
+  const showFit = !isStatic && isFit;
 
   // Se lo stato cambia con il puntatore fermo, va aggiornata anche l'etichetta.
   useEffect(() => {
@@ -50,11 +71,12 @@ export function ZoomMedia({ media, onCursorLabel, matchHeight = false }: ZoomMed
   return (
     <button
       type="button"
-      aria-label={isFit ? "Fit image to width" : "Fit image to height"}
+      aria-label={isStatic ? undefined : showFit ? "Fit image to width" : "Fit image to height"}
       onClick={(event) => {
-        // Tiene il click lontano dal backdrop: l'immagine alterna, non chiude mai.
+        // Tiene il click lontano dal backdrop: non deve mai chiudere il
+        // modale, che alterni lo stato (zoom) o no (statica).
         event.stopPropagation();
-        setIsFit((previous) => !previous);
+        if (!isStatic) setIsFit((previous) => !previous);
       }}
       onPointerEnter={() => {
         isPointerInside.current = true;
@@ -71,7 +93,7 @@ export function ZoomMedia({ media, onCursorLabel, matchHeight = false }: ZoomMed
       // più alta), così l'immagine dentro ha una base da riempire.
       className={cn(
         "block",
-        isFit ? "mx-auto w-auto" : cn("w-full", matchHeight && "nav:h-full"),
+        showFit ? "mx-auto w-auto" : cn("w-full", matchHeight && "nav:h-full"),
       )}
     >
       <Image
@@ -83,7 +105,7 @@ export function ZoomMedia({ media, onCursorLabel, matchHeight = false }: ZoomMed
         priority
         className={cn(
           "select-none",
-          isFit
+          showFit
             ? "inline-block h-[100dvh] w-auto max-w-none"
             : cn("h-auto w-full", matchHeight && "nav:h-full nav:object-cover"),
         )}

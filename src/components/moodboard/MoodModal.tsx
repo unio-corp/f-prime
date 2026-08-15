@@ -139,12 +139,15 @@ export function MoodModal({ item, onClose }: MoodModalProps) {
         {/* Nessun padding: il Medium arriva a filo. ZoomMedia ferma il proprio
             click, così ciò che gli sta accanto resta backdrop. La classe della
             colonna sinistra arriva dal registro dei layout: il guscio non sa
-            per quale layout la applica. */}
+            per quale layout la applica. La copertina è statica ogni volta che
+            esiste una colonna destra: il guscio lo sa già, da `rightColumn`,
+            senza bisogno di conoscere il nome del layout. */}
         <div className={leftColumnConfig.className}>
           <ZoomMedia
             media={item.media}
             onCursorLabel={setCursorLabel}
             matchHeight={leftColumnConfig.matchHeight}
+            isStatic={Boolean(rightColumn)}
           />
         </div>
 
