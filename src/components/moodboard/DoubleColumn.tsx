@@ -13,7 +13,13 @@ export function DoubleColumn({ item, onCursorLabel }: ModalColumnProps<"double">
 
   return (
     <div className="flex min-h-full items-start">
-      <ColumnMedium item={medium} onCursorLabel={onCursorLabel} priority />
+      <ColumnMedium
+        item={medium}
+        onCursorLabel={onCursorLabel}
+        priority
+        // La colonna occupa metà viewport da `nav:` in su, tutta sotto.
+        sizes="(min-width: 64rem) 50vw, 100vw"
+      />
     </div>
   );
 }

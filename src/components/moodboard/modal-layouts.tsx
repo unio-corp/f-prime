@@ -18,6 +18,16 @@ export const RIGHT_COLUMN_RENDERERS: {
 } = { double: DoubleColumn, gallery: GalleryColumn };
 
 /**
+ * Classi della colonna sinistra (la copertina, resa dal guscio) per-layout.
+ * Solo `gallery` ne ha bisogno: la copertina resta ancorata in basso mentre
+ * la colonna destra, più alta, scorre. `double` non richiede nulla di
+ * speciale: altezza auto, nessuna ancora.
+ */
+const LEFT_COLUMN_CLASSES: { [K in RightColumnLayout]?: string } = {
+  gallery: "nav:self-end nav:sticky nav:bottom-0",
+};
+
+/**
  * Risolve il layout effettivamente reso. I dati incoerenti non arrivano più
  * fin qui — li ferma `toMoodItem()` — quindi resta un solo caso: dati validi
  * per un layout il cui renderer non è ancora scritto.
@@ -55,4 +65,13 @@ export function renderRightColumn(
   }>;
 
   return <Renderer item={item} onCursorLabel={onCursorLabel} />;
+}
+
+/**
+ * Classe della colonna sinistra per l'item corrente. Il guscio la applica
+ * senza sapere per quale layout: la conoscenza resta qui, nel registro.
+ */
+export function getLeftColumnClassName(item: MoodItem): string | undefined {
+  if (item.modal === "zoom") return undefined;
+  return LEFT_COLUMN_CLASSES[item.modal];
 }

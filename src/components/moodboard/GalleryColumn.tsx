@@ -4,13 +4,13 @@ import { ColumnMedium } from "./ColumnMedium";
 import type { ModalColumnProps } from "./modal-contracts";
 
 /**
- * I Media aggiuntivi impilati, senza spazio fra loro: scorrono con la pagina,
- * che nel modale è già l'unico contesto di scroll. Il tipo garantisce che ce
- * ne sia almeno uno.
+ * I Media aggiuntivi in una griglia a 3 colonne, a filo, senza spaziatura fra
+ * le celle: scorrono con la pagina, che nel modale è già l'unico contesto di
+ * scroll. Il tipo garantisce che ce ne sia almeno uno.
  */
 export function GalleryColumn({ item, onCursorLabel }: ModalColumnProps<"gallery">) {
   return (
-    <div className="flex min-h-full flex-col">
+    <div className="grid min-h-full grid-cols-3">
       {item.extraMedia.map((medium, index) => (
         <ColumnMedium
           // La sorgente può ripetere lo stesso Medium: l'indice fa parte
@@ -19,6 +19,9 @@ export function GalleryColumn({ item, onCursorLabel }: ModalColumnProps<"gallery
           item={medium}
           onCursorLabel={onCursorLabel}
           priority={index === 0}
+          // Colonna destra a 50vw, divisa in 3: ogni cella è circa 1/6 della
+          // viewport da `nav:` in su, 1/3 sotto (colonna destra a tutta larghezza).
+          sizes="(min-width: 64rem) 16.6667vw, 33.3333vw"
         />
       ))}
     </div>

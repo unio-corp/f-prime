@@ -7,7 +7,7 @@ import type { MoodItem } from "@/lib/moodboard/source";
 import { cn } from "@/lib/utils";
 
 import { CURSOR_HIDDEN } from "./modal-contracts";
-import { renderRightColumn } from "./modal-layouts";
+import { getLeftColumnClassName, renderRightColumn } from "./modal-layouts";
 import { ZoomMedia } from "./ZoomMedia";
 
 interface MoodModalProps {
@@ -37,6 +37,7 @@ export function MoodModal({ item, onClose }: MoodModalProps) {
   const setCursorLabel = useCallback((label: string | null) => setContentLabel(label), []);
 
   const rightColumn = renderRightColumn(item, setCursorLabel);
+  const leftColumnClassName = getLeftColumnClassName(item);
 
   useEffect(() => {
     // Catturato prima che il focus entri nel modale: è il pulsante della Tile
@@ -132,12 +133,16 @@ export function MoodModal({ item, onClose }: MoodModalProps) {
       <div
         className={cn(
           "grid min-h-full grid-cols-1",
-          rightColumn && "nav:grid-cols-[1fr_1fr] wide:grid-cols-[1fr_var(--spacing-fp-product-column)]",
+          rightColumn && "nav:grid-cols-[1fr_1fr]",
         )}
       >
         {/* Nessun padding: il Medium arriva a filo. ZoomMedia ferma il proprio
-            click, così ciò che gli sta accanto resta backdrop. */}
-        <ZoomMedia media={item.media} onCursorLabel={setCursorLabel} />
+            click, così ciò che gli sta accanto resta backdrop. La classe della
+            colonna sinistra arriva dal registro dei layout: il guscio non sa
+            per quale layout la applica. */}
+        <div className={leftColumnClassName}>
+          <ZoomMedia media={item.media} onCursorLabel={setCursorLabel} />
+        </div>
 
         {/* Nessun wrapper che fermi il click: ogni Medium della colonna decide
             da sé se il click gli appartiene o se deve chiudere il modale. */}

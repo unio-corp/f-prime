@@ -12,6 +12,13 @@ interface ColumnMediumProps {
   onCursorLabel: (label: CursorLabel) => void;
   /** Il primo Medium visibile della colonna si carica subito, gli altri pigramente. */
   priority?: boolean;
+  /**
+   * Attributo `sizes` per `next/image`, in funzione di quanta viewport occupa
+   * davvero questa colonna: dichiarato dal layout chiamante (`DoubleColumn`,
+   * `GalleryColumn`), non fisso qui, perché ogni layout divide la colonna
+   * destra in un numero diverso di celle.
+   */
+  sizes: string;
 }
 
 /**
@@ -19,7 +26,7 @@ interface ColumnMediumProps {
  * `OPEN LINK`; senza, è inerte e il cursore sparisce — mostrare `CLOSE` su
  * qualcosa che ferma il click sarebbe una promessa non mantenuta.
  */
-export function ColumnMedium({ item, onCursorLabel, priority = false }: ColumnMediumProps) {
+export function ColumnMedium({ item, onCursorLabel, priority = false, sizes }: ColumnMediumProps) {
   const { media, href } = item;
   const label = href ? "OPEN LINK" : CURSOR_HIDDEN;
   const isPointerInside = useRef(false);
@@ -41,7 +48,7 @@ export function ColumnMedium({ item, onCursorLabel, priority = false }: ColumnMe
         alt={media.alt}
         width={media.width}
         height={media.height}
-        sizes="(min-width: 64rem) 50vw, 100vw"
+        sizes={sizes}
         priority={priority}
         loading={priority ? undefined : "lazy"}
         className="h-auto w-full select-none"
