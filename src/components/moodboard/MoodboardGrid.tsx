@@ -1,57 +1,54 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import type { MoodItem } from "@/lib/moodboard/source";
 
+import { MoodModal } from "./MoodModal";
 import { MoodboardTile } from "./MoodboardTile";
-import { ProductsPreviewModal } from "./ProductsPreviewModal";
 
 interface MoodboardGridProps {
   items: MoodItem[];
 }
 
 /**
- * An edge-to-edge grid, 4 columns until 1000px and 8 above it. No gap, no
- * container margin. Tiles are static: the 13 videos autoplay and loop,
- * nothing cycles or crossfades.
+ * Griglia a tutta larghezza: 4 colonne fino a 1000px, 6 oltre. Nessun gap,
+ * nessun margine di contenitore. Le Tile sono statiche: niente rotazioni né
+ * dissolvenze.
  *
- * `priority={item.id < 8}` covers ids 0-7: exactly the first row at the 8-col
- * desktop breakpoint (1440px measurement: 8 cols x 4 rows), and the first two
- * rows at the 4-col mobile breakpoint. We don't know the viewport at render
- * time, so the desktop row is the natural upper bound to eager-load; the
- * extra mobile row is a deliberate, small over-fetch (4 tiles) rather than
- * under-fetching what's above the fold on narrow screens.
+ * 18 Tile totali: 6x3 al breakpoint desktop. Sotto `nav:` le Tile 7 e 15
+ * si nascondono (16 = 4x4 esatte), altrimenti l'ultima riga resterebbe con
+ * due sole celle.
+ *
+ * `priority={item.id < 9}` copre la prima riga desktop (id 0-5) e le prime
+ * due righe mobile (id 0-6 e 8; la 7 è nascosta). Al momento del render non
+ * conosciamo la viewport, quindi carichiamo subito l'unione dei due casi
+ * above the fold: qualche Tile in più su desktop è un sovraccarico piccolo
+ * e voluto, preferibile al caricare troppo poco sugli schermi stretti.
  */
 export function MoodboardGrid({ items }: MoodboardGridProps) {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const openItem = items.find((item) => item.slug === openSlug) ?? null;
 
-  // The frozen `onOpen`/`onClose` interfaces don't carry the triggering
-  // element, so focus is captured here (the actual document.activeElement at
-  // click time is the tile's button) and restored when the modal closes.
-  const lastFocusedRef = useRef<HTMLElement | null>(null);
-
-  const handleOpen = (slug: string) => {
-    lastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    setOpenSlug(slug);
-  };
-
-  const handleClose = () => {
-    setOpenSlug(null);
-    lastFocusedRef.current?.focus();
-    lastFocusedRef.current = null;
-  };
+  // Cattura e ripristino del focus vivono nel guscio del modale, che sa
+  // quando viene montato e smontato.
+  const handleClose = () => setOpenSlug(null);
 
   return (
     <div className="relative">
-      <section aria-label="Moodboard" className="grid w-full grid-cols-4 nav:grid-cols-8">
+      <section aria-label="Moodboard" className="grid w-full grid-cols-4 nav:grid-cols-6">
         {items.map((item) => (
-          <MoodboardTile key={item.slug} item={item} onOpen={handleOpen} priority={item.id < 8} />
+          <MoodboardTile
+            key={item.slug}
+            item={item}
+            onOpen={setOpenSlug}
+            priority={item.id < 9}
+            hiddenBelowNav={item.id === 7 || item.id === 15}
+          />
         ))}
       </section>
 
-      {openItem ? <ProductsPreviewModal item={openItem} onClose={handleClose} /> : null}
+      {openItem ? <MoodModal item={openItem} onClose={handleClose} /> : null}
     </div>
   );
 }

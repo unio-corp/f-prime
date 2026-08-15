@@ -877,11 +877,14 @@ con:
 
 - [ ] **Step 3: Dare al layout una Tile su cui esistere**
 
-In `src/lib/moodboard/tiles.ts`, sostituire l'intero record con `"id":2` con:
+In `src/lib/moodboard/tiles.ts`, sostituire l'intero record con `"id":4` con:
 
 ```json
-  {"id":2,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"double","extraMedia":[{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"href":"https://femminaprime.com"}]},
+  {"id":4,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"modal":"double","extraMedia":[{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"href":"https://femminaprime.com"}]},
 ```
+
+Le Tile 0–3 portano immagini reali inserite editorialmente: non toccarle. I dati di
+prova vivono solo su Tile che usano ancora `placeholder.jpg`.
 
 - [ ] **Step 4: Verificare la catena statica**
 
@@ -974,11 +977,13 @@ con:
 
 - [ ] **Step 3: Dare al layout una Tile su cui esistere**
 
-In `src/lib/moodboard/tiles.ts`, sostituire l'intero record con `"id":3` con:
+In `src/lib/moodboard/tiles.ts`, sostituire l'intero record con `"id":5` con:
 
 ```json
-  {"id":3,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"gallery","extraMedia":[{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"href":"https://femminaprime.com"},{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""}},{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2226,"height":2783,"alt":""},"href":"/"}]},
+  {"id":5,"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""},"modal":"gallery","extraMedia":[{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":1080,"height":1440,"alt":""},"href":"https://femminaprime.com"},{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2000,"height":2500,"alt":""}},{"media":{"kind":"image","src":"/moodboard/placeholder.jpg","width":2226,"height":2783,"alt":""},"href":"/"}]},
 ```
+
+Le Tile 0–3 portano immagini reali inserite editorialmente: non toccarle.
 
 Tre Media con proporzioni diverse, di cui uno **senza** `href`: è il caso che rende osservabile il cursore nascosto.
 

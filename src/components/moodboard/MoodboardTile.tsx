@@ -1,27 +1,34 @@
 import type { MoodItem } from "@/lib/moodboard/source";
+import { cn } from "@/lib/utils";
 
 import { TileMedia } from "./TileMedia";
 
 interface MoodboardTileProps {
   item: MoodItem;
   onOpen: (slug: string) => void;
-  /** The first row is above the fold at every breakpoint. */
+  /** La prima riga è above the fold a ogni breakpoint. */
   priority?: boolean;
+  /** Sotto `nav:` la griglia a 4 colonne mostra 16 Tile: 18 lascerebbero
+   *  l'ultima riga con due sole celle, quindi due Tile si nascondono. */
+  hiddenBelowNav?: boolean;
 }
 
 /**
- * One grid cell: `aspect-ratio: 1/1.25`, `overflow: hidden`, and a full-bleed
- * button trigger. Tiles have **no hover effect** — only `cursor: pointer` and
- * an inset focus ring.
+ * Una cella della griglia: `aspect-ratio: 1/1.25`, `overflow: hidden` e un
+ * pulsante che occupa tutta la cella. Le Tile **non hanno effetto hover** —
+ * solo `cursor: pointer` e un anello di focus interno.
  */
-export function MoodboardTile({ item, onOpen, priority }: MoodboardTileProps) {
-  const count = item.products.length;
-
+export function MoodboardTile({ item, onOpen, priority, hiddenBelowNav }: MoodboardTileProps) {
   return (
-    <div className="relative aspect-[1/1.25] overflow-hidden">
+    <div
+      className={cn(
+        "relative aspect-[1/1.25] overflow-hidden",
+        hiddenBelowNav && "hidden nav:block",
+      )}
+    >
       <button
         type="button"
-        aria-label={`Preview ${count} product${count === 1 ? "" : "s"}`}
+        aria-label="Open preview"
         onClick={() => onOpen(item.slug)}
         className="relative h-full w-full cursor-pointer align-top focus-visible:shadow-none focus-visible:after:pointer-events-none focus-visible:after:absolute focus-visible:after:inset-0 focus-visible:after:shadow-[inset_0_0_0_var(--spacing-fp-ring)_var(--color-fp-focus)] focus-visible:after:content-['']"
       >
