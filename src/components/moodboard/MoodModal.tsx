@@ -140,6 +140,7 @@ export function MoodModal({ item, onClose }: MoodModalProps) {
         <ZoomMedia
           media={item.media}
           onCursorLabel={setCursorLabel}
+          toggleable={item.modal === "zoom"}
           constrainHeight={item.modal === "gallery"}
         />
 
